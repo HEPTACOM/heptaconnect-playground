@@ -1,0 +1,10 @@
+{
+    "name": "heptacom/heptaconnect-playground-shopware",
+    "description": "Sandbox environment to demonstrate specific heptaconnect features in a shopware environment",
+    "require": {
+        "php": ">=7.4",
+        "shopware/core": ">=6.2.3",
+        "heptacom/heptaconnect-bridge-shopware-platform": "dev-master"
+    },
+    "minimum-stability": "dev"
+}

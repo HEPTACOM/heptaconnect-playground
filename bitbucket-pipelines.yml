@@ -1,0 +1,16 @@
+image: alpine/git:latest
+
+pipelines:
+    branches:
+        master:
+            -   step:
+                    name: Skip for manual step
+                    script:
+                        - echo "hello"
+            -   step:
+                    name: Publish to github
+                    deployment: production
+                    trigger: manual
+                    script:
+                        - git remote add github git@github.com:HEPTACOM/heptaconnect-playground.git
+                        - git push --force github master
