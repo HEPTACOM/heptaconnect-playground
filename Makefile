@@ -19,3 +19,7 @@ clean: shopware-platform-clean
 shopware-platform-clean:
 	[[ ! -f shopware-platform/composer.lock ]] || rm shopware-platform/composer.lock
 	[[ ! -d shopware-platform/vendor ]] || rm -rf shopware-platform/vendor
+
+.PHONY: shopware-platform-migration
+shopware-platform-migration: shopware-platform
+	shopware-platform/bin/shopware database:create-migration 'shopware-platform/vendor/heptacom/heptaconnect-bridge-shopware-platform/src/Migration' 'Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Migration'
