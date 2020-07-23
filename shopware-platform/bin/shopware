@@ -1,0 +1,60 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Shopware\Core\Kernel;
+use Shopware\Core\Framework\Plugin\KernelPluginLoader\DbalKernelPluginLoader;
+use Shopware\Core\Framework\Plugin\KernelPluginLoader\StaticKernelPluginLoader;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\Dotenv\Dotenv;
+
+if (PHP_VERSION_ID < 70200) {
+    echo 'Your cli is running PHP version ' . PHP_VERSION . ' but Shopware 6 requires at least PHP 7.2.0' . PHP_EOL;
+    exit();
+}
+
+if (PHP_VERSION_ID < 70400) {
+    echo 'Your cli is running PHP version ' . PHP_VERSION . ' but HEPTAConnect requires at least PHP 7.4.0' . PHP_EOL;
+    exit();
+}
+
+set_time_limit(0);
+umask(0000);
+
+$classLoader = require __DIR__ . '/../vendor/autoload.php';
+$envFile = __DIR__ . '/../.env';
+
+if (is_readable($envFile) && !is_dir($envFile)) {
+    (new Dotenv(true))->load(__DIR__ . '/../.env');
+}
+
+if (!isset($_SERVER['PROJECT_ROOT'])) {
+    $_SERVER['PROJECT_ROOT'] = dirname(__DIR__);
+}
+
+$input = new ArgvInput();
+$env = 'dev';
+$debug = true;
+Debug::enable();
+$pluginLoader = new StaticKernelPluginLoader($classLoader, null);
+
+if ($input->getFirstArgument() === 'playground:init') {
+    $_SERVER['INSTALL'] = true;
+}
+
+if (!isset($_SERVER['INSTALL']) && (trim($_SERVER['DATABASE_URL'] ?? '') !== '')) {
+    $pluginLoader = new DbalKernelPluginLoader($classLoader, null, \Shopware\Core\Kernel::getConnection());
+}
+
+$application = new Application(new class ($env, $debug, $pluginLoader, 'heptaconnect', '1.0.0-playground', null, dirname(__DIR__)) extends Kernel {
+    protected function initializeDatabaseConnectionVariables(): void
+    {
+        if ($_SERVER['INSTALL'] ?? false) {
+            return;
+        }
+
+        parent::initializeDatabaseConnectionVariables();
+    }
+});
+$application->run($input);
