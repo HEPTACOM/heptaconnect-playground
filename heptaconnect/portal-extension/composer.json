@@ -1,0 +1,37 @@
+{
+    "name": "heptacom/heptaconnect-playground-portal-extension",
+    "description": "Sandbox environment to demonstrate specific heptaconnect features",
+    "type": "library",
+    "keywords": [
+        "heptaconnect-portal-extension"
+    ],
+    "repositories": [
+        {
+            "url": "../dataset",
+            "type": "path"
+        },
+        {
+            "url": "../portal",
+            "type": "path"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Heptacom\\HeptaConnect\\Playground\\PortalExtension\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "heptacom/heptaconnect-portal-base": "@dev",
+        "heptacom/heptaconnect-dataset-base": "@dev",
+        "heptacom/heptaconnect-playground-portal": "@dev",
+        "heptacom/heptaconnect-playground-dataset": "@dev"
+    },
+    "extra": {
+        "heptaconnect": {
+            "portalExtensions": [
+                "Heptacom\\HeptaConnect\\Playground\\PortalExtension\\BottleContent"
+            ]
+        }
+    }
+}
