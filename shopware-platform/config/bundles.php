@@ -17,5 +17,5 @@ return [
     Shopware\Storefront\Storefront::class => ['all' => true],
 
     // heptaconnect
-    \Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Bundle::class => ['all' => true],
+    Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Bundle::class => ['all' => true],
 ];
