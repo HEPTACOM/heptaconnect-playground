@@ -4,6 +4,12 @@
     "bin": [
         "bin/shopware"
     ],
+    "repositories": [
+        {
+            "url": "../heptaconnect/**",
+            "type": "path"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Heptacom\\HeptaConnect\\Playground\\ShopwarePlatform\\": "src/"
@@ -13,7 +19,10 @@
         "php": ">=7.4",
         "shopware/core": "6.2.3",
         "shopware/storefront": "6.2.3",
-        "heptacom/heptaconnect-bridge-shopware-platform": "@dev"
+        "heptacom/heptaconnect-bridge-shopware-platform": "@dev",
+        "heptacom/heptaconnect-playground-dataset": "@dev",
+        "heptacom/heptaconnect-playground-portal": "@dev",
+        "heptacom/heptaconnect-playground-portal-extension": "@dev"
     },
     "minimum-stability": "dev"
 }
