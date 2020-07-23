@@ -10,6 +10,7 @@ info:
 shopware-platform:
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
+	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 
 .PHONY: clean
 clean: shopware-platform-clean
@@ -18,4 +19,3 @@ clean: shopware-platform-clean
 shopware-platform-clean:
 	[[ ! -f shopware-platform/composer.lock ]] || rm shopware-platform/composer.lock
 	[[ ! -d shopware-platform/vendor ]] || rm -rf shopware-platform/vendor
-
