@@ -1,0 +1,17 @@
+{
+    "name": "heptacom/heptaconnect-playground-dataset",
+    "description": "Sandbox environment to demonstrate specific heptaconnect features",
+    "type": "library",
+    "keywords": [
+        "heptaconnect-dataset"
+    ],
+    "autoload": {
+        "psr-4": {
+            "Heptacom\\HeptaConnect\\Playground\\Dataset\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "heptacom/heptaconnect-dataset-base": "@dev"
+    }
+}
