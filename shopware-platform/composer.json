@@ -1,5 +1,5 @@
 {
-    "name": "heptacom/heptaconnect-playground-shopware",
+    "name": "heptacom/heptaconnect-playground-shopware-platform",
     "description": "Sandbox environment to demonstrate specific heptaconnect features in a shopware environment",
     "bin": [
         "bin/shopware"
