@@ -13,7 +13,7 @@
         "php": ">=7.4",
         "shopware/core": "6.2.3",
         "shopware/storefront": "6.2.3",
-        "heptacom/heptaconnect-bridge-shopware-platform": "dev-master"
+        "heptacom/heptaconnect-bridge-shopware-platform": "@dev"
     },
     "minimum-stability": "dev"
 }
