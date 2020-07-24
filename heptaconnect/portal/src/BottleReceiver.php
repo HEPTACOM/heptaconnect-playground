@@ -1,0 +1,42 @@
+<?php declare(strict_types=1);
+
+namespace Heptacom\HeptaConnect\Playground\Portal;
+
+use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
+use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiveContextInterface;
+use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiverInterface;
+use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiverStackInterface;
+use Heptacom\HeptaConnect\Portal\Base\MappedDatasetEntityCollection;
+use Ramsey\Uuid\Uuid;
+
+class BottleReceiver implements ReceiverInterface
+{
+    public function receive(
+        MappedDatasetEntityCollection $mappedDatasetEntities,
+        ReceiveContextInterface $context,
+        ReceiverStackInterface $stack
+    ): iterable {
+        foreach ($mappedDatasetEntities as $mappedEntity) {
+            $mapping = $mappedEntity->getMapping();
+            $portalNode = $context->getPortalNode($mapping);
+
+            if (!$portalNode instanceof BottlePortal) {
+                $context->markAsFailed($mapping, new \Exception('Invalid portal'));
+
+                continue;
+            }
+
+            $id = $mapping->getExternalId() ?? Uuid::uuid4()->getHex();
+            $mapping->setExternalId($id);
+
+            yield $mapping;
+        }
+
+        yield from $stack->next($mappedDatasetEntities, $context);
+    }
+
+    public function supports(): array
+    {
+        return [Bottle::class];
+    }
+}

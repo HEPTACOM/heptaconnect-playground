@@ -35,7 +35,9 @@ class BottlePortal implements PortalNodeInterface
 
     public function getReceivers(): ReceiverCollection
     {
-        return new ReceiverCollection();
+        return new ReceiverCollection([
+            new BottleReceiver(),
+        ]);
     }
 
     public function getBottleStorage(): BottleCollection
