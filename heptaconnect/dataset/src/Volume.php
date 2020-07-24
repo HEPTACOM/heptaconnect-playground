@@ -6,13 +6,13 @@ use Heptacom\HeptaConnect\Dataset\Base\DatasetEntity;
 
 class Volume extends DatasetEntity
 {
-    public const UNIT_LITRE = 'LITRE';
+    public const UNIT_LITER = 'LITER';
 
     public const UNIT_CUBIC_METER = 'CUBIC_METER';
 
     protected float $amount = 0.;
 
-    protected string $unit = self::UNIT_LITRE;
+    protected string $unit = self::UNIT_LITER;
 
     public function getAmount(): float
     {
