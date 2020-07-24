@@ -40,15 +40,15 @@ class BottlePortal implements PortalNodeInterface
     {
         if (is_null($this->bottles)) {
             $this->bottles = new BottleCollection([
-                $this->generateBottle(Cap::TYPE_CROWN_CORK, 2, BottleShape::TYPE_ROUND, [
+                $this->generateBottle('pecl', Cap::TYPE_CROWN_CORK, 2, BottleShape::TYPE_ROUND, [
                     $this->generateInternationalLabel('#b1900f', 'Pecl Juice'),
                     $this->generateInternationalLabel('#80600a', 'Refreshing source to experience your inner beauty'),
                 ]),
-                $this->generateBottle(Cap::TYPE_FLIP_TOP, 1, BottleShape::TYPE_ANGULAR, [
+                $this->generateBottle('composer', Cap::TYPE_FLIP_TOP, 1, BottleShape::TYPE_ANGULAR, [
                     $this->generateInternationalLabel('#00ff00', 'Calming composition'),
                     $this->generateInternationalLabel('#ff0000', 'Contains some supplements'),
                 ]),
-                $this->generateBottle(Cap::TYPE_SCREW, 0.05, BottleShape::TYPE_ROUND, [
+                $this->generateBottle('psysh', Cap::TYPE_SCREW, 0.05, BottleShape::TYPE_ROUND, [
                     $this->generateInternationalLabel('#ffffff', 'REPL shot'),
                     $this->generateInternationalLabel('#000000', 'POWER POWER POWER'),
                 ]),
@@ -68,9 +68,10 @@ class BottlePortal implements PortalNodeInterface
             ->setText($translatable);
     }
 
-    private function generateBottle(string $cap, float $volumeAmount, string $bottleShape, array $labels): Bottle
+    private function generateBottle(string $key, string $cap, float $volumeAmount, string $bottleShape, array $labels): Bottle
     {
         return (new Bottle())
+            ->setPrimaryKey($key)
             ->setCap((new Cap())->setType($cap))
             ->setCapacity((new Volume())->setAmount($volumeAmount, Volume::UNIT_LITER))
             ->setShape((new BottleShape())->setType($bottleShape))
