@@ -21,7 +21,9 @@ class BottlePortal implements PortalNodeInterface
 
     public function getExplorers(): ExplorerCollection
     {
-        return new ExplorerCollection();
+        return new ExplorerCollection([
+            new BottleExplorer(),
+        ]);
     }
 
     public function getEmitters(): EmitterCollection
@@ -70,8 +72,10 @@ class BottlePortal implements PortalNodeInterface
 
     private function generateBottle(string $key, string $cap, float $volumeAmount, string $bottleShape, array $labels): Bottle
     {
-        return (new Bottle())
-            ->setPrimaryKey($key)
+        $bottle = new Bottle();
+        $bottle->setPrimaryKey($key);
+
+        return $bottle
             ->setCap((new Cap())->setType($cap))
             ->setCapacity((new Volume())->setAmount($volumeAmount, Volume::UNIT_LITER))
             ->setShape((new BottleShape())->setType($bottleShape))
