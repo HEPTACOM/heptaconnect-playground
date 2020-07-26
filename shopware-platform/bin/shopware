@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-use Shopware\Core\Kernel;
+use Heptacom\HeptaConnect\Playground\ShopwarePlatform\Kernel;
 use Shopware\Core\Framework\Plugin\KernelPluginLoader\DbalKernelPluginLoader;
 use Shopware\Core\Framework\Plugin\KernelPluginLoader\StaticKernelPluginLoader;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -47,14 +47,13 @@ if (!isset($_SERVER['INSTALL']) && (trim($_SERVER['DATABASE_URL'] ?? '') !== '')
     $pluginLoader = new DbalKernelPluginLoader($classLoader, null, \Shopware\Core\Kernel::getConnection());
 }
 
-$application = new Application(new class ($env, $debug, $pluginLoader, 'heptaconnect', '1.0.0-playground', null, dirname(__DIR__)) extends Kernel {
-    protected function initializeDatabaseConnectionVariables(): void
-    {
-        if ($_SERVER['INSTALL'] ?? false) {
-            return;
-        }
+$application = new Application(new Kernel($env,
+    $debug,
+    $pluginLoader,
+    'heptaconnect',
+    '1.0.0-playground',
+    null,
+    dirname(__DIR__)
+));
 
-        parent::initializeDatabaseConnectionVariables();
-    }
-});
 $application->run($input);
