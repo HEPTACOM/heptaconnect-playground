@@ -3,7 +3,7 @@
 namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
-use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiveContextInterface;
+use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiveContextInterface;
 use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiverInterface;
 use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiverStackInterface;
 use Heptacom\HeptaConnect\Portal\Base\MappedDatasetEntityCollection;
