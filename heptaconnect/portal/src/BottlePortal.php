@@ -79,7 +79,7 @@ class BottlePortal implements PortalNodeInterface
 
         return $bottle
             ->setCap((new Cap())->setType($cap))
-            ->setCapacity((new Volume())->setAmount($volumeAmount, Volume::UNIT_LITER))
+            ->setCapacity((new Volume())->setAmount($volumeAmount)->setUnit(Volume::UNIT_LITER))
             ->setShape((new BottleShape())->setType($bottleShape))
             ->setLabels(new LabelCollection($labels));
     }
