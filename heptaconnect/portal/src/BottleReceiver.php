@@ -5,7 +5,7 @@ namespace Heptacom\HeptaConnect\Playground\Portal;
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
 use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiveContextInterface;
 use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiverInterface;
-use Heptacom\HeptaConnect\Portal\Base\Contract\ReceiverStackInterface;
+use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiverStackInterface;
 use Heptacom\HeptaConnect\Portal\Base\MappedDatasetEntityCollection;
 use Ramsey\Uuid\Uuid;
 
