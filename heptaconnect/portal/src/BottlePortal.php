@@ -10,7 +10,7 @@ use Heptacom\HeptaConnect\Playground\Dataset\Cap;
 use Heptacom\HeptaConnect\Playground\Dataset\Label;
 use Heptacom\HeptaConnect\Playground\Dataset\LabelCollection;
 use Heptacom\HeptaConnect\Playground\Dataset\Volume;
-use Heptacom\HeptaConnect\Portal\Base\Contract\PortalNodeInterface;
+use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalNodeInterface;
 use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\ExplorerCollection;
 use Heptacom\HeptaConnect\Portal\Base\Reception\ReceiverCollection;
