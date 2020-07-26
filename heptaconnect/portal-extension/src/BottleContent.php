@@ -4,7 +4,7 @@ namespace Heptacom\HeptaConnect\Playground\PortalExtension;
 
 use Heptacom\HeptaConnect\Playground\Portal\BottlePortal;
 use Heptacom\HeptaConnect\Portal\Base\Contract\PortalNodeExtensionInterface;
-use Heptacom\HeptaConnect\Portal\Base\EmitterCollection;
+use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
 use Heptacom\HeptaConnect\Portal\Base\Support\AbstractPortalNodeExtension;
 
 class BottleContent extends AbstractPortalNodeExtension implements PortalNodeExtensionInterface
