@@ -20,9 +20,9 @@ class HalfFullHalfEmptyBottleEmitter implements EmitterInterface
     ): iterable {
         /** @var MappedDatasetEntityStruct $mappedEntity */
         foreach ($stack->next($mappings, $context) as $key => $mappedEntity) {
-            $portalNode = $context->getPortalNode($mappedEntity->getMapping());
+            $portal = $context->getPortal($mappedEntity->getMapping());
 
-            if (!$portalNode instanceof BottlePortal) {
+            if (!$portal instanceof BottlePortal) {
                 yield $key => $mappedEntity;
                 continue;
             }

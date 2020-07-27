@@ -19,13 +19,13 @@ class BottleEmitter implements EmitterInterface
     ): iterable {
         /** @var MappingInterface $mapping */
         foreach ($mappings as $mapping) {
-            $portalNode = $context->getPortalNode($mapping);
+            $portal = $context->getPortal($mapping);
 
-            if (!$portalNode instanceof BottlePortal) {
+            if (!$portal instanceof BottlePortal) {
                 continue;
             }
 
-            $data = iterable_to_array($portalNode->getBottleStorage()->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
+            $data = iterable_to_array($portal->getBottleStorage()->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
 
             if (\count($data) === 0) {
                 continue;

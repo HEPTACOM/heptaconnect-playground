@@ -3,11 +3,11 @@
 namespace Heptacom\HeptaConnect\Playground\PortalExtension;
 
 use Heptacom\HeptaConnect\Playground\Portal\BottlePortal;
-use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalNodeExtensionInterface;
+use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalExtensionInterface;
 use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
-use Heptacom\HeptaConnect\Portal\Base\Support\AbstractPortalNodeExtension;
+use Heptacom\HeptaConnect\Portal\Base\Support\AbstractPortalExtension;
 
-class BottleContent extends AbstractPortalNodeExtension implements PortalNodeExtensionInterface
+class BottleContent extends AbstractPortalExtension implements PortalExtensionInterface
 {
     public function getEmitterDecorators(): EmitterCollection
     {

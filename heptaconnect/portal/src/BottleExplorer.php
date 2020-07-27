@@ -11,14 +11,14 @@ class BottleExplorer implements ExplorerInterface
 {
     public function explore(ExploreContextInterface $context, ExplorerStackInterface $stack): iterable
     {
-        $portalNode = $context->getPortalNode();
+        $portal = $context->getPortal();
 
-        if (!$portalNode instanceof BottlePortal) {
+        if (!$portal instanceof BottlePortal) {
             return $stack->next($context);
         }
 
         /** @var Bottle $bottle */
-        foreach ($portalNode->getBottleStorage() as $bottle) {
+        foreach ($portal->getBottleStorage() as $bottle) {
             yield $bottle;
         }
 

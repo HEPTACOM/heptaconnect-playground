@@ -18,9 +18,9 @@ class BottleReceiver implements ReceiverInterface
     ): iterable {
         foreach ($mappedDatasetEntities as $mappedEntity) {
             $mapping = $mappedEntity->getMapping();
-            $portalNode = $context->getPortalNode($mapping);
+            $portal = $context->getPortal($mapping);
 
-            if (!$portalNode instanceof BottlePortal) {
+            if (!$portal instanceof BottlePortal) {
                 $context->markAsFailed($mapping, new \Exception('Invalid portal'));
 
                 continue;
