@@ -10,12 +10,12 @@ use Heptacom\HeptaConnect\Playground\Dataset\Cap;
 use Heptacom\HeptaConnect\Playground\Dataset\Label;
 use Heptacom\HeptaConnect\Playground\Dataset\LabelCollection;
 use Heptacom\HeptaConnect\Playground\Dataset\Volume;
-use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalInterface;
+use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalContract;
 use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\ExplorerCollection;
 use Heptacom\HeptaConnect\Portal\Base\Reception\ReceiverCollection;
 
-class BottlePortal implements PortalInterface
+class BottlePortal extends PortalContract
 {
     private ?BottleCollection $bottles = null;
 
