@@ -3,11 +3,11 @@
 namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
-use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExplorerInterface;
+use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExplorerContract;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExplorerStackInterface;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExploreContextInterface;
 
-class BottleExplorer implements ExplorerInterface
+class BottleExplorer extends ExplorerContract
 {
     public function explore(ExploreContextInterface $context, ExplorerStackInterface $stack): iterable
     {
