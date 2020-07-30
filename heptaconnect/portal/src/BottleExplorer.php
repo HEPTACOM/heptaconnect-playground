@@ -18,7 +18,7 @@ class BottleExplorer extends ExplorerContract
         }
 
         /** @var Bottle $bottle */
-        foreach ($portal->getBottleStorage() as $bottle) {
+        foreach ($portal->getBottleStorage($context->getConfig() ?? []) as $bottle) {
             yield $bottle;
         }
 

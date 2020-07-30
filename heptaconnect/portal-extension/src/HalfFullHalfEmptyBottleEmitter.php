@@ -34,11 +34,13 @@ class HalfFullHalfEmptyBottleEmitter extends EmitterContract
                 continue;
             }
 
+            $config = $context->getConfig($mappedEntity->getMapping()) ?? [];
+            $config['contentFactor'] ??= 0.5;
             $content = new Dataset\BottleContent();
             $content->setContent(
                 (new Volume())
                     ->setUnit(Volume::UNIT_LITER)
-                    ->setAmount($bottle->getCapacity()->getAmount() * 0.5)
+                    ->setAmount($bottle->getCapacity()->getAmount() * $config['contentFactor'])
             );
             $bottle->attach($content);
 

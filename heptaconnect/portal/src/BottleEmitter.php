@@ -25,7 +25,7 @@ class BottleEmitter extends EmitterContract
                 continue;
             }
 
-            $data = iterable_to_array($portal->getBottleStorage()->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
+            $data = iterable_to_array($portal->getBottleStorage($context->getConfig($mapping) ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
 
             if (\count($data) === 0) {
                 continue;

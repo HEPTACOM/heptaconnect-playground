@@ -14,6 +14,7 @@ use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalContract;
 use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\ExplorerCollection;
 use Heptacom\HeptaConnect\Portal\Base\Reception\ReceiverCollection;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BottlePortal extends PortalContract
 {
@@ -40,7 +41,18 @@ class BottlePortal extends PortalContract
         ]);
     }
 
-    public function getBottleStorage(): BottleCollection
+    public function getConfigurationTemplate(): OptionsResolver
+    {
+        return parent::getConfigurationTemplate()
+            ->setDefined('black')
+            ->setDefault('black', '#000000')
+            ->setAllowedTypes('black', 'string')
+            ->setDefined('white')
+            ->setDefault('white', '#ffffff')
+            ->setAllowedTypes('white', 'string');
+    }
+
+    public function getBottleStorage(array $configuration): BottleCollection
     {
         if (is_null($this->bottles)) {
             $this->bottles = new BottleCollection([
@@ -53,8 +65,8 @@ class BottlePortal extends PortalContract
                     $this->generateInternationalLabel('#ff0000', 'Contains some supplements'),
                 ]),
                 $this->generateBottle('psysh', Cap::TYPE_SCREW, 0.05, BottleShape::TYPE_ROUND, [
-                    $this->generateInternationalLabel('#ffffff', 'REPL shot'),
-                    $this->generateInternationalLabel('#000000', 'POWER POWER POWER'),
+                    $this->generateInternationalLabel($configuration['white'], 'REPL shot'),
+                    $this->generateInternationalLabel($configuration['black'], 'POWER POWER POWER'),
                 ]),
             ]);
         }
