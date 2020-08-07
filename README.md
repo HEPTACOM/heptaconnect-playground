@@ -1,6 +1,6 @@
-# HEPTAConnect Playground
+# HEPTAconnect Playground
 
-The purpose of this repository is to enable easy exploration of HEPTAConnect in different environments.
+The purpose of this repository is to enable easy exploration of HEPTAconnect in different environments.
 A central Makefile is used to automate most of the examples.
 
 ## Shopware Platform

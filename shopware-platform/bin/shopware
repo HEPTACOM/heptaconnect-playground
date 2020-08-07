@@ -15,7 +15,7 @@ if (PHP_VERSION_ID < 70200) {
 }
 
 if (PHP_VERSION_ID < 70400) {
-    echo 'Your cli is running PHP version ' . PHP_VERSION . ' but HEPTAConnect requires at least PHP 7.4.0' . PHP_EOL;
+    echo 'Your cli is running PHP version ' . PHP_VERSION . ' but HEPTAconnect requires at least PHP 7.4.0' . PHP_EOL;
     exit();
 }
 
