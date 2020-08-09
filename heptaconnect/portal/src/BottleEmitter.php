@@ -31,7 +31,13 @@ class BottleEmitter extends EmitterContract
                 continue;
             }
 
-            yield new MappedDatasetEntityStruct($mapping, clone current($data));
+            /** @var Bottle $entity */
+            $entity = clone current($data);
+
+            $statKey = 'bottleStats.emit.' . $entity->getPrimaryKey();
+            $context->getStorage($mapping)->set($statKey, ($context->getStorage($mapping)->get($statKey) ?? 0) + 1);
+
+            yield new MappedDatasetEntityStruct($mapping, $entity);
         }
 
         yield from $stack->next($mappings, $context);

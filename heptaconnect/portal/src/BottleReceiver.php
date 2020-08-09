@@ -3,11 +3,11 @@
 namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
+use Heptacom\HeptaConnect\Portal\Base\Mapping\MappedDatasetEntityStruct;
 use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiveContextInterface;
 use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiverContract;
 use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiverStackInterface;
 use Heptacom\HeptaConnect\Portal\Base\Mapping\MappedDatasetEntityCollection;
-use Ramsey\Uuid\Uuid;
 
 class BottleReceiver extends ReceiverContract
 {
@@ -16,8 +16,10 @@ class BottleReceiver extends ReceiverContract
         ReceiveContextInterface $context,
         ReceiverStackInterface $stack
     ): iterable {
+        /** @var MappedDatasetEntityStruct $mappedEntity */
         foreach ($mappedDatasetEntities as $mappedEntity) {
             $mapping = $mappedEntity->getMapping();
+            $entity = $mappedEntity->getDatasetEntity();
             $portal = $context->getPortal($mapping);
 
             if (!$portal instanceof BottlePortal) {
@@ -26,8 +28,10 @@ class BottleReceiver extends ReceiverContract
                 continue;
             }
 
-            $id = $mapping->getExternalId() ?? Uuid::uuid4()->getHex();
+            $id = $mapping->getExternalId() ?? $entity->getPrimaryKey();
             $mapping->setExternalId($id);
+            $statKey = 'bottleStats.receive.' . ($mapping->getExternalId() ?? '');
+            $context->getStorage($mapping)->set($statKey, ($context->getStorage($mapping)->get($statKey) ?? 0) + 1);
 
             yield $mapping;
         }
