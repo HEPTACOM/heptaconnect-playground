@@ -4,17 +4,21 @@ namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExplorerContract;
-use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExplorerStackInterface;
 use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExploreContextInterface;
+use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalContract;
+use Heptacom\HeptaConnect\Portal\Base\Portal\Exception\UnexpectedPortalNodeException;
 
 class BottleExplorer extends ExplorerContract
 {
-    public function explore(ExploreContextInterface $context, ExplorerStackInterface $stack): iterable
+    public function supports(): string
     {
-        $portal = $context->getPortal();
+        return Bottle::class;
+    }
 
+    protected function run(PortalContract $portal, ExploreContextInterface $context): iterable
+    {
         if (!$portal instanceof BottlePortal) {
-            return $stack->next($context);
+            throw new UnexpectedPortalNodeException($portal);
         }
 
         /** @var Bottle $bottle */
@@ -24,12 +28,5 @@ class BottleExplorer extends ExplorerContract
 
             yield $bottle;
         }
-
-        return $stack->next($context);
-    }
-
-    public function supports(): string
-    {
-        return Bottle::class;
     }
 }
