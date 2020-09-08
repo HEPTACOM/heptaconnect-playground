@@ -11,9 +11,8 @@ class Label extends DatasetEntity
 
     protected string $color = '#000000';
 
-    public function __construct()
+    protected function initialize(): void
     {
-        parent::__construct();
         $this->text = new TranslatableString();
     }
 
