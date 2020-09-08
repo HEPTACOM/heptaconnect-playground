@@ -35,7 +35,7 @@ class BottleEmitter extends EmitterContract
         /** @var Bottle $entity */
         $entity = clone current($data);
 
-        $statKey = 'bottleStats.emit.' . $entity->getPrimaryKey();
+        $statKey = 'bottleStats.emit.' . ($entity->getPrimaryKey() ?? '');
         $context->getStorage($mapping)->set($statKey, ($context->getStorage($mapping)->get($statKey) ?? 0) + 1);
 
         return $entity;

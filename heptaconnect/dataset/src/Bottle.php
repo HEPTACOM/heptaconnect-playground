@@ -14,9 +14,8 @@ class Bottle extends DatasetEntity
 
     protected BottleShape $shape;
 
-    public function __construct()
+    protected function initialize(): void
     {
-        parent::__construct();
         $this->capacity = new Volume();
         $this->labels = new LabelCollection();
         $this->cap = new Cap();

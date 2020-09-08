@@ -23,7 +23,7 @@ class BottleExplorer extends ExplorerContract
 
         /** @var Bottle $bottle */
         foreach ($portal->getBottleStorage($context->getConfig() ?? []) as $bottle) {
-            $statKey = 'bottleStats.explore.' . $bottle->getPrimaryKey();
+            $statKey = 'bottleStats.explore.' . ($bottle->getPrimaryKey() ?? '');
             $context->getStorage()->set($statKey, ($context->getStorage()->get($statKey) ?? 0) + 1);
 
             yield $bottle;

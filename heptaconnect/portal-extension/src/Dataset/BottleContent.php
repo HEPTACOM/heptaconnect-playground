@@ -9,9 +9,8 @@ class BottleContent extends DatasetEntity
 {
     protected Volume $content;
 
-    public function __construct()
+    protected function initialize(): void
     {
-        parent::__construct();
         $this->content = new Volume();
     }
 
