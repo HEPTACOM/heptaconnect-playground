@@ -22,4 +22,4 @@ shopware-platform-clean:
 
 .PHONY: shopware-platform-migration
 shopware-platform-migration: shopware-platform
-	shopware-platform/bin/shopware database:create-migration 'shopware-platform/vendor/heptacom/heptaconnect-bridge-shopware-platform/src/Migration' 'Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Migration'
+	shopware-platform/bin/shopware database:create-migration 'shopware-platform/vendor/heptacom/heptaconnect-storage-shopware-dal/src/Migration' 'Heptacom\HeptaConnect\Storage\ShopwareDal\Migration'
