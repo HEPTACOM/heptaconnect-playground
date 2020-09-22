@@ -132,7 +132,7 @@ class Init extends Command
     {
         $io->section('Run migrations');
 
-        foreach (['null', 'core', 'Framework', 'HeptaConnectBridgeShopwarePlatform'] as $migrationSourceName) {
+        foreach (['null', 'core', 'Framework', 'HeptaConnectStorage'] as $migrationSourceName) {
             $collection = $loader->collect($migrationSourceName);
             $collection->sync();
             $total = \count($collection->getExecutableMigrations());
