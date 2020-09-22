@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-PHP := $(shell which php)
+PHP := $(shell which php) $(PHP_EXTRA_ARGS)
 COMPOSER := $(PHP) $(shell which composer)
 
 .PHONY: info
