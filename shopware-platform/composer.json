@@ -1,5 +1,6 @@
 {
     "name": "heptacom/heptaconnect-playground-shopware-platform",
+    "version": "0.0.1",
     "description": "Sandbox environment to demonstrate specific heptaconnect features in a shopware environment",
     "bin": [
         "bin/shopware"
@@ -20,10 +21,9 @@
         "composer/package-versions-deprecated": "1.8.0",
         "shopware/core": "6.2.3",
         "shopware/storefront": "6.2.3",
-        "heptacom/heptaconnect-bridge-shopware-platform": "@dev",
-        "heptacom/heptaconnect-playground-dataset": "@dev",
-        "heptacom/heptaconnect-playground-portal": "@dev",
-        "heptacom/heptaconnect-playground-portal-extension": "@dev"
+        "heptacom/heptaconnect-bridge-shopware-platform": ">=0.0.1",
+        "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
+        "heptacom/heptaconnect-playground-portal": ">=0.0.1",
+        "heptacom/heptaconnect-playground-portal-extension": ">=0.0.1"
     },
-    "minimum-stability": "dev"
 }

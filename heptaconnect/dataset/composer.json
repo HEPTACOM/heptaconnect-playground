@@ -1,5 +1,6 @@
 {
     "name": "heptacom/heptaconnect-playground-dataset",
+    "version": "0.0.1",
     "description": "Sandbox environment to demonstrate specific heptaconnect features",
     "type": "library",
     "keywords": [
@@ -12,6 +13,6 @@
     },
     "require": {
         "php": ">=7.4",
-        "heptacom/heptaconnect-dataset-base": "@dev"
+        "heptacom/heptaconnect-dataset-base": ">=0.0.1"
     }
 }
