@@ -2,9 +2,9 @@
 
 namespace Heptacom\HeptaConnect\Playground\Dataset;
 
-use Heptacom\HeptaConnect\Dataset\Base\DatasetEntity;
+use Heptacom\HeptaConnect\Dataset\Base\Contract\DatasetEntityContract;
 
-class Cap extends DatasetEntity
+class Cap extends DatasetEntityContract
 {
     public const TYPE_CROWN_CORK = 'CROWN_CORK';
 

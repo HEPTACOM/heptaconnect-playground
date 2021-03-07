@@ -2,9 +2,9 @@
 
 namespace Heptacom\HeptaConnect\Playground\Dataset;
 
-use Heptacom\HeptaConnect\Dataset\Base\DatasetEntity;
+use Heptacom\HeptaConnect\Dataset\Base\Contract\DatasetEntityContract;
 
-class BottleShape extends DatasetEntity
+class BottleShape extends DatasetEntityContract
 {
     public const TYPE_ROUND = 'ROUND';
 
