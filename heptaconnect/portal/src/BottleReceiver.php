@@ -10,9 +10,9 @@ use Heptacom\HeptaConnect\Portal\Base\Reception\Contract\ReceiverContract;
 
 class BottleReceiver extends ReceiverContract
 {
-    public function supports(): array
+    public function supports(): string
     {
-        return [Bottle::class];
+        return Bottle::class;
     }
 
     protected function run(

@@ -10,9 +10,9 @@ use Heptacom\HeptaConnect\Portal\Base\Emission\Contract\EmitContextInterface;
 
 class BottleEmitter extends EmitterContract
 {
-    public function supports(): array
+    public function supports(): string
     {
-        return [Bottle::class];
+        return Bottle::class;
     }
 
     protected function run(

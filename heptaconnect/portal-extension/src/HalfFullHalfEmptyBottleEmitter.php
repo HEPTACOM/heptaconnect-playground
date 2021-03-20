@@ -48,10 +48,8 @@ class HalfFullHalfEmptyBottleEmitter extends EmitterContract
         }
     }
 
-    public function supports(): array
+    public function supports(): string
     {
-        return [
-            Bottle::class,
-        ];
+        return Bottle::class;
     }
 }
