@@ -5,12 +5,19 @@
     "bin": [
         "bin/shopware"
     ],
-    "repositories": [
-        {
+    "repositories": {
+        "heptaconnect-demo": {
             "url": "../heptaconnect/**",
             "type": "path"
+        },
+        "heptaconnect-sources": {
+            "type": "path",
+            "url": "../repos/**",
+            "options": {
+                "symlink": false
+            }
         }
-    ],
+    },
     "autoload": {
         "psr-4": {
             "Heptacom\\HeptaConnect\\Playground\\ShopwarePlatform\\": "src/"

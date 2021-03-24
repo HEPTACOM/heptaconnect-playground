@@ -7,7 +7,7 @@ info:
 	echo "There is no specific make target. Have a look at the README.md for further instructions"
 
 .PHONY: shopware-platform
-shopware-platform:
+shopware-platform: repos
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
@@ -23,3 +23,14 @@ shopware-platform-clean:
 .PHONY: shopware-platform-migration
 shopware-platform-migration: shopware-platform
 	shopware-platform/bin/shopware database:create-migration 'shopware-platform/vendor/heptacom/heptaconnect-storage-shopware-dal/src/Migration' 'Heptacom\HeptaConnect\Storage\ShopwareDal\Migration'
+
+.PHONY: repos
+repos:
+	git -C "repos/storage-shopware-dal" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-shopware-dal.git" "repos/storage-shopware-dal"
+	git -C "repos/storage-native" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-native.git" "repos/storage-native"
+	git -C "repos/storage-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-base.git" "repos/storage-base"
+	git -C "repos/portal-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-portal-base.git" "repos/portal-base"
+	git -C "repos/lib-sdk" pull || git clone "https://github.com/HEPTACOM/heptaconnect-lib-sdk.git" "repos/lib-sdk"
+	git -C "repos/dataset-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-dataset-base.git" "repos/dataset-base"
+	git -C "repos/core" pull || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "repos/core"
+	git -C "repos/bridge-shopware-platform" pull || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "repos/bridge-shopware-platform"
