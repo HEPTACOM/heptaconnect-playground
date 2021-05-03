@@ -5,6 +5,11 @@
     "bin": [
         "bin/shopware"
     ],
+    "config": {
+        "platform": {
+            "php": "7.4.0"
+        }
+    },
     "repositories": {
         "heptaconnect-demo": {
             "url": "../heptaconnect/**",

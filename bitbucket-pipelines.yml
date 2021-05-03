@@ -5,8 +5,8 @@ definitions:
         mysql:
             image: mysql:5.7
             variables:
-                MYSQL_DATABASE: 'pipelines'
-                MYSQL_ROOT_PASSWORD: 'let_me_in'
+                MYSQL_DATABASE: 'heptaconnect_shopware'
+                MYSQL_ROOT_PASSWORD: 'root'
     steps:
         -   step: &default-step
                 caches:
@@ -51,4 +51,4 @@ pipelines:
                 services:
                     - mysql
                 script:
-                    - DATABASE_URL=mysql://root:let_me_in@mysql/pipelines make shopware-platform
+                    - DATABASE_URL=mysql://root:root@127.0.0.1:3306/heptaconnect_shopware make shopware-platform
