@@ -26,11 +26,11 @@ shopware-platform-migration: shopware-platform
 
 .PHONY: repos
 repos:
-	git -C "repos/storage-shopware-dal" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-shopware-dal.git" "repos/storage-shopware-dal"
-	git -C "repos/storage-native" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-native.git" "repos/storage-native"
-	git -C "repos/storage-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-storage-base.git" "repos/storage-base"
-	git -C "repos/portal-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-portal-base.git" "repos/portal-base"
-	git -C "repos/lib-sdk" pull || git clone "https://github.com/HEPTACOM/heptaconnect-lib-sdk.git" "repos/lib-sdk"
-	git -C "repos/dataset-base" pull || git clone "https://github.com/HEPTACOM/heptaconnect-dataset-base.git" "repos/dataset-base"
-	git -C "repos/core" pull || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "repos/core"
-	git -C "repos/bridge-shopware-platform" pull || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "repos/bridge-shopware-platform"
+	git -C "repos/storage-shopware-dal" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-shopware-dal.git" "repos/storage-shopware-dal"
+	git -C "repos/storage-native" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-native.git" "repos/storage-native"
+	git -C "repos/storage-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-base.git" "repos/storage-base"
+	git -C "repos/portal-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-portal-base.git" "repos/portal-base"
+	git -C "repos/lib-sdk" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-lib-sdk.git" "repos/lib-sdk"
+	git -C "repos/dataset-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-dataset-base.git" "repos/dataset-base"
+	git -C "repos/core" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "repos/core"
+	git -C "repos/bridge-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "repos/bridge-shopware-platform"
