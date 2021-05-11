@@ -132,8 +132,7 @@ class Init extends Command
     {
         $io->section('Run migrations');
 
-        foreach (['null', 'core', 'Framework', 'HeptaConnectStorage'] as $migrationSourceName) {
-            $collection = $loader->collect($migrationSourceName);
+        foreach ($loader->collectAll() as $migrationSourceName => $collection) {
             $collection->sync();
             $total = \count($collection->getExecutableMigrations());
             $io->progressStart($total);
@@ -147,13 +146,12 @@ class Init extends Command
                 throw $e;
             }
 
-            $collection = $loader->collect($migrationSourceName);
             $collection->sync();
             $total = \count($collection->getExecutableDestructiveMigrations());
             $io->progressStart($total);
 
             try {
-                foreach ($collection->migrateInSteps() as $_return) {
+                foreach ($collection->migrateDestructiveInSteps() as $_return) {
                     $io->progressAdvance();
                 }
             } catch (\Throwable $e) {
