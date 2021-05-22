@@ -10,3 +10,11 @@ services:
             - '@Shopware\Core\Framework\DataAbstractionLayer\Indexing\IndexerRegistryInterface'
             - '@Shopware\Core\Framework\DataAbstractionLayer\Indexing\EntityIndexerRegistry'
             - !tagged_iterator shopware.migration_source
+
+    Heptacom\HeptaConnect\Playground\ShopwarePlatform\Console\Command\DemoData:
+        tags:
+            - { name: console.command }
+        arguments:
+            - '@Heptacom\HeptaConnect\Storage\ShopwareDal\StorageKeyGenerator'
+            - '@heptaconnect_bridge_key_alias.repository'
+            - '@Heptacom\HeptaConnect\Storage\ShopwareDal\Repository\PortalNodeRepository'
