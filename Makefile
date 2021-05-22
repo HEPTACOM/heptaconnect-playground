@@ -2,10 +2,6 @@ SHELL := /bin/bash
 PHP := $(shell which php) $(PHP_EXTRA_ARGS)
 COMPOSER := $(PHP) $(shell which composer)
 
-.PHONY: info
-info:
-	echo "There is no specific make target. Have a look at the README.md for further instructions"
-
 .PHONY: shopware-platform
 shopware-platform: repos
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
