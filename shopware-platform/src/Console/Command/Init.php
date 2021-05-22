@@ -92,6 +92,12 @@ class Init extends Command
                 '--password' => 'shopware',
             ],
             [
+                'command' => 'sales-channel:create:storefront',
+                'allowedToFail' => true,
+                '--name' => 'Storefront',
+                '--url' => $_SERVER['APP_URL'] ?? 'http://localhost',
+            ],
+            [
                 'command' => 'assets:install',
             ],
             [
