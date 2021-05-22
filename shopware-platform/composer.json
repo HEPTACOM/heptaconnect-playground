@@ -17,10 +17,7 @@
         },
         "heptaconnect-sources": {
             "type": "path",
-            "url": "../repos/**",
-            "options": {
-                "symlink": false
-            }
+            "url": "../repos/**"
         }
     },
     "autoload": {
