@@ -5,11 +5,6 @@ services:
         arguments:
             - '%env(DATABASE_URL)%'
             - '%kernel.project_dir%'
-            - '@cache.object'
-            - '@monolog.logger'
-            - '@Shopware\Core\Framework\DataAbstractionLayer\Indexing\IndexerRegistryInterface'
-            - '@Shopware\Core\Framework\DataAbstractionLayer\Indexing\EntityIndexerRegistry'
-            - '@Shopware\Core\System\User\Service\UserProvisioner'
             - !tagged_iterator shopware.migration_source
 
     Heptacom\HeptaConnect\Playground\ShopwarePlatform\Console\Command\DemoData:

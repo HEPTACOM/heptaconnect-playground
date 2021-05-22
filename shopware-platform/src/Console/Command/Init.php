@@ -6,15 +6,9 @@ use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\DBAL\FetchMode;
-use Psr\Log\LoggerInterface;
-use Shopware\Core\Framework\DataAbstractionLayer\Indexing\EntityIndexerRegistry;
-use Shopware\Core\Framework\DataAbstractionLayer\Indexing\IndexerRegistryInterface;
-use Shopware\Core\Framework\Migration\MigrationCollectionLoader;
-use Shopware\Core\Framework\Migration\MigrationRuntime;
 use Shopware\Core\Framework\Migration\MigrationSource;
-use Shopware\Core\System\User\Service\UserProvisioner;
-use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,21 +16,18 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class Init extends Command
 {
+    private const BLOCKED_MIGRATION_SOURCES = [
+        'core.',
+        'null',
+        'Framework',
+        'Storefront',
+    ];
+
     protected static $defaultName = 'playground:init';
 
     private string $dsn;
 
     private string $projectDir;
-
-    private TagAwareAdapterInterface $cache;
-
-    private LoggerInterface $logger;
-
-    private IndexerRegistryInterface $indexer;
-
-    private EntityIndexerRegistry $entityIndexerRegistry;
-
-    private UserProvisioner $userProvisioner;
 
     /** @var array|iterable|\Traversable|MigrationSource[] */
     private array $migrationSources;
@@ -44,21 +35,11 @@ class Init extends Command
     public function __construct(
         string $dsn,
         string $projectDir,
-        TagAwareAdapterInterface $cache,
-        LoggerInterface $logger,
-        IndexerRegistryInterface $indexer,
-        EntityIndexerRegistry $entityIndexerRegistry,
-        UserProvisioner $userProvisioner,
         iterable $migrationSources
     ) {
         parent::__construct();
         $this->dsn = $dsn;
         $this->projectDir = $projectDir;
-        $this->cache = $cache;
-        $this->logger = $logger;
-        $this->indexer = $indexer;
-        $this->entityIndexerRegistry = $entityIndexerRegistry;
-        $this->userProvisioner = $userProvisioner;
         $this->migrationSources = iterable_to_array($migrationSources);
     }
 
@@ -74,14 +55,57 @@ class Init extends Command
         $connection = $this->getDatabaseLessConnection();
 
         $this->setupDatabase($io, $force, $connection);
-        $this->runMigrations($io, new MigrationCollectionLoader(
-            $connection,
-            new MigrationRuntime($connection, $this->logger),
-            $this->migrationSources
-        ));
-        $this->createAdminUser();
-        $this->runIndexers($io);
-        $this->cache->clear();
+        $output->writeln('');
+
+        $commands = [];
+
+        foreach ($this->migrationSources as $migrationSource) {
+            foreach (self::BLOCKED_MIGRATION_SOURCES as $blockedMigrationSource) {
+                if (strpos($migrationSource->getName(), $blockedMigrationSource) === 0) {
+                    continue 2;
+                }
+            }
+
+            array_push($commands, ...[
+                [
+                    'command' => 'database:migrate',
+                    'identifier' => $migrationSource->getName(),
+                    '--all' => true,
+                ],
+                [
+                    'command' => 'database:migrate-destructive',
+                    'identifier' => $migrationSource->getName(),
+                    '--all' => true,
+                ]
+            ]);
+        }
+
+        array_push($commands, ...[
+            [
+                'command' => 'dal:refresh:index',
+            ],
+            [
+                'command' => 'user:create',
+                'allowedToFail' => true,
+                'username' => 'admin',
+                '--admin' => true,
+                '--password' => 'shopware',
+            ],
+            [
+                'command' => 'assets:install',
+            ],
+            [
+                'command' => 'cache:clear',
+            ],
+        ]);
+
+        $this->runCommands($commands, $output);
+
+        if (!file_exists($this->projectDir . '/public/.htaccess')
+            && file_exists($this->projectDir . '/public/.htaccess.dist')
+        ) {
+            copy($this->projectDir . '/public/.htaccess.dist', $this->projectDir . '/public/.htaccess');
+        }
 
         return 0;
     }
@@ -122,7 +146,7 @@ class Init extends Command
 
         $connection->exec('USE `' . $dbName . '`');
 
-        $tables = $connection->query('SHOW TABLES')->fetchAll(FetchMode::COLUMN);
+        $tables = $connection->executeQuery('SHOW TABLES')->fetchAll(FetchMode::COLUMN);
 
         if (!in_array('migration', $tables, true)) {
             $io->writeln('Importing base schema.sql');
@@ -131,59 +155,32 @@ class Init extends Command
         }
     }
 
-    /**
-     * @throws \Throwable
-     */
-    private function runMigrations(SymfonyStyle $io, MigrationCollectionLoader $loader): void
+    private function runCommands(array $commands, OutputInterface $output): int
     {
-        $io->section('Run migrations');
+        $application = $this->getApplication();
+        if ($application === null) {
+            throw new \RuntimeException('No application initialised');
+        }
 
-        foreach ($loader->collectAll() as $migrationSourceName => $collection) {
-            $collection->sync();
-            $total = \count($collection->getExecutableMigrations());
-            $io->progressStart($total);
+        foreach ($commands as $parameters) {
+            $output->writeln('');
 
-            try {
-                foreach ($collection->migrateInSteps() as $_return) {
-                    $io->progressAdvance();
-                }
-            } catch (\Throwable $e) {
-                $io->progressFinish();
-                throw $e;
-            }
-
-            $collection->sync();
-            $total = \count($collection->getExecutableDestructiveMigrations());
-            $io->progressStart($total);
+            $command = $application->find((string) $parameters['command']);
+            $allowedToFail = $parameters['allowedToFail'] ?? false;
+            unset($parameters['command'], $parameters['allowedToFail']);
 
             try {
-                foreach ($collection->migrateDestructiveInSteps() as $_return) {
-                    $io->progressAdvance();
+                $returnCode = $command->run(new ArrayInput($parameters), $output);
+                if ($returnCode !== 0 && !$allowedToFail) {
+                    return $returnCode;
                 }
             } catch (\Throwable $e) {
-                $io->progressFinish();
-                throw $e;
+                if (!$allowedToFail) {
+                    throw $e;
+                }
             }
         }
 
-        $io->success('Successfully run migrations');
-    }
-
-    private function createAdminUser(): void
-    {
-        try {
-            $this->userProvisioner->provision('admin', 'shopware', []);
-        } catch (\Throwable $userAlreadyExists) {
-        }
-    }
-
-    private function runIndexers(SymfonyStyle $io): void
-    {
-        $io->section('Run indexers');
-
-        $this->indexer->index(new \DateTime());
-        $this->entityIndexerRegistry->index(false);
-
-        $io->success('Successfully run indexers');
+        return 0;
     }
 }

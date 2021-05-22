@@ -9,7 +9,6 @@ shopware-platform: repos
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 	$(PHP) shopware-platform/bin/shopware playground:demo-data -vvv --no-interaction
-	$(PHP) shopware-platform/bin/shopware assets:install
 
 .PHONY: clean
 clean: shopware-platform-clean
