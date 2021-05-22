@@ -47,7 +47,7 @@ class Init extends Command
         EntityIndexerRegistry $entityIndexerRegistry,
         iterable $migrationSources
     ) {
-        parent::__construct(null);
+        parent::__construct();
         $this->dsn = $dsn;
         $this->projectDir = $projectDir;
         $this->cache = $cache;
