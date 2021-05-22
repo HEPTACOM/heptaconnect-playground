@@ -30,6 +30,7 @@
         "composer/package-versions-deprecated": "1.8.0",
         "shopware/core": "6.2.3",
         "shopware/storefront": "6.2.3",
+        "shopware/administration": "6.2.3",
         "heptacom/heptaconnect-bridge-shopware-platform": ">=0.0.1",
         "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal": ">=0.0.1",

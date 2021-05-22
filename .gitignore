@@ -1,5 +1,7 @@
 vendor/
 composer.lock
 
-var/
+shopware-platform/public/*
+!shopware-platform/public/index.php
+shopware-platform/var/
 repos/

@@ -12,6 +12,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Indexing\IndexerRegistryInterfa
 use Shopware\Core\Framework\Migration\MigrationCollectionLoader;
 use Shopware\Core\Framework\Migration\MigrationRuntime;
 use Shopware\Core\Framework\Migration\MigrationSource;
+use Shopware\Core\System\User\Service\UserProvisioner;
 use Symfony\Component\Cache\Adapter\TagAwareAdapterInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -35,6 +36,8 @@ class Init extends Command
 
     private EntityIndexerRegistry $entityIndexerRegistry;
 
+    private UserProvisioner $userProvisioner;
+
     /** @var array|iterable|\Traversable|MigrationSource[] */
     private array $migrationSources;
 
@@ -45,6 +48,7 @@ class Init extends Command
         LoggerInterface $logger,
         IndexerRegistryInterface $indexer,
         EntityIndexerRegistry $entityIndexerRegistry,
+        UserProvisioner $userProvisioner,
         iterable $migrationSources
     ) {
         parent::__construct();
@@ -54,6 +58,7 @@ class Init extends Command
         $this->logger = $logger;
         $this->indexer = $indexer;
         $this->entityIndexerRegistry = $entityIndexerRegistry;
+        $this->userProvisioner = $userProvisioner;
         $this->migrationSources = iterable_to_array($migrationSources);
     }
 
@@ -74,6 +79,7 @@ class Init extends Command
             new MigrationRuntime($connection, $this->logger),
             $this->migrationSources
         ));
+        $this->createAdminUser();
         $this->runIndexers($io);
         $this->cache->clear();
 
@@ -161,6 +167,14 @@ class Init extends Command
         }
 
         $io->success('Successfully run migrations');
+    }
+
+    private function createAdminUser(): void
+    {
+        try {
+            $this->userProvisioner->provision('admin', 'shopware', []);
+        } catch (\Throwable $userAlreadyExists) {
+        }
     }
 
     private function runIndexers(SymfonyStyle $io): void

@@ -15,4 +15,5 @@ return [
     Shopware\Core\Content\Content::class => ['all' => true],
     Shopware\Core\Checkout\Checkout::class => ['all' => true],
     Shopware\Storefront\Storefront::class => ['all' => true],
+    Shopware\Administration\Administration::class => ['all' => true],
 ];

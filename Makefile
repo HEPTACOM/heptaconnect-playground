@@ -4,10 +4,12 @@ COMPOSER := $(PHP) $(shell which composer)
 
 .PHONY: shopware-platform
 shopware-platform: repos
+	chmod 600 shopware-platform/config/jwt/{public,private}.pem
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 	$(PHP) shopware-platform/bin/shopware playground:demo-data -vvv --no-interaction
+	$(PHP) shopware-platform/bin/shopware assets:install
 
 .PHONY: clean
 clean: shopware-platform-clean
@@ -16,6 +18,7 @@ clean: shopware-platform-clean
 shopware-platform-clean:
 	[[ ! -f shopware-platform/composer.lock ]] || rm shopware-platform/composer.lock
 	[[ ! -d shopware-platform/vendor ]] || rm -rf shopware-platform/vendor
+	[[ ! -d shopware-platform/var ]] || rm -rf shopware-platform/var
 
 .PHONY: shopware-platform-migration
 shopware-platform-migration: shopware-platform
