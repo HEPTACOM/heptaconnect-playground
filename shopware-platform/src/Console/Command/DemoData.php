@@ -87,5 +87,7 @@ class DemoData extends Command
                 'original' => $this->storageKeyGenerator->serialize($portalNodeKey),
             ]], $context);
         }
+
+        return 0;
     }
 }
