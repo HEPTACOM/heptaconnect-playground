@@ -22,6 +22,7 @@ shopware-platform-migration: shopware-platform
 
 .PHONY: repos
 repos:
+	[[ -d repos ]] || mkdir repos
 	git -C "repos/storage-shopware-dal" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-shopware-dal.git" "repos/storage-shopware-dal"
 	git -C "repos/storage-native" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-native.git" "repos/storage-native"
 	git -C "repos/storage-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-base.git" "repos/storage-base"
