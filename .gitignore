@@ -6,3 +6,4 @@ shopware-platform/public/*
 !shopware-platform/public/index.php
 shopware-platform/var/
 repos/
+sdk/
