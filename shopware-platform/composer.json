@@ -35,6 +35,7 @@
         "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal-extension": ">=0.0.1",
-        "heptacom/heptaconnect-portal-local-shopware-platform": ">=0.0.1"
+        "heptacom/heptaconnect-portal-local-shopware-platform": ">=0.0.1",
+        "heptacom/heptaconnect-lib-sdk": ">=0.0.1"
     }
 }
