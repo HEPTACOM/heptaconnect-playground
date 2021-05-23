@@ -12,7 +12,7 @@ shopware-platform: repos
 
 .PHONY: sdk
 sdk: repos
-	[[ -d sdk ]] || $(COMPOSER) create-project heptacom/heptaconnect-sdk:dev-master sdk --no-scripts --keep-vcs
+	[[ -d sdk ]] || $(COMPOSER) create-project heptacom/heptaconnect-sdk:dev-master sdk --no-scripts --remove-vcs
 	$(COMPOSER) config 'repositories.heptaconnect-sources' --json '{"type":"path","url":"../repos/**"}' -d sdk
 	$(COMPOSER) config 'repositories.heptaconnect-sources-sdk' --json '{"type":"path","url":"../repos/lib-sdk","options":{"symlink": false}}' -d sdk
 	$(COMPOSER) require 'heptacom/heptaconnect-lib-sdk:>=0.0.1' --update-with-all-dependencies -d sdk
