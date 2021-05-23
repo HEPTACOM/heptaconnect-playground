@@ -10,14 +10,26 @@ shopware-platform: repos
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 	$(PHP) shopware-platform/bin/shopware playground:demo-data -vvv --no-interaction
 
+.PHONY: sdk
+sdk: repos
+	[[ -d sdk ]] || $(COMPOSER) create-project heptacom/heptaconnect-sdk:dev-master sdk --no-scripts --keep-vcs
+	$(COMPOSER) config 'repositories.heptaconnect-sources' --json '{"type":"path","url":"../repos/**"}' -d sdk
+	$(COMPOSER) config 'repositories.heptaconnect-sources-sdk' --json '{"type":"path","url":"../repos/**","options":{"symlink": false}}' -d sdk
+	$(COMPOSER) require 'heptacom/heptaconnect-lib-sdk:>=0.0.1' --update-with-all-dependencies -d sdk
+	$(PHP) sdk/vendor/bin/heptaconnect-sdk sdk:install
+
 .PHONY: clean
-clean: shopware-platform-clean
+clean: shopware-platform-clean sdk-clean
 
 .PHONY: shopware-platform-clean
 shopware-platform-clean:
 	[[ ! -f shopware-platform/composer.lock ]] || rm shopware-platform/composer.lock
 	[[ ! -d shopware-platform/vendor ]] || rm -rf shopware-platform/vendor
 	[[ ! -d shopware-platform/var ]] || rm -rf shopware-platform/var
+
+.PHONY: sdk-clean
+sdk-clean:
+	[[ ! -d sdk ]] || rm -rf sdk
 
 .PHONY: shopware-platform-migration
 shopware-platform-migration: shopware-platform
