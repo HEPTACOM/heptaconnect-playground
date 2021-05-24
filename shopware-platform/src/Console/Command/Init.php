@@ -85,6 +85,9 @@ class Init extends Command
                 'command' => 'dal:refresh:index',
             ],
             [
+                'command' => 'theme:refresh',
+            ],
+            [
                 'command' => 'user:create',
                 'allowedToFail' => true,
                 'username' => 'admin',
