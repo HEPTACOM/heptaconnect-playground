@@ -101,6 +101,11 @@ class Init extends Command
                 '--url' => $_SERVER['APP_URL'] ?? 'http://localhost',
             ],
             [
+                'command' => 'theme:change',
+                '--all' => true,
+                'theme-name' => 'Storefront',
+            ],
+            [
                 'command' => 'assets:install',
             ],
             [
