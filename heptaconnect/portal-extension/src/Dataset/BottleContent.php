@@ -2,10 +2,10 @@
 
 namespace Heptacom\HeptaConnect\Playground\PortalExtension\Dataset;
 
-use Heptacom\HeptaConnect\Dataset\Base\DatasetEntity;
+use Heptacom\HeptaConnect\Dataset\Base\Contract\AttachableInterface;
 use Heptacom\HeptaConnect\Playground\Dataset\Volume;
 
-class BottleContent extends DatasetEntity
+class BottleContent implements AttachableInterface
 {
     protected Volume $content;
 

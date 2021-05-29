@@ -20,7 +20,7 @@ class HalfFullHalfEmptyBottleEmitter extends EmitterContract
     ): iterable {
         /** @var MappedDatasetEntityStruct $mappedEntity */
         foreach ($stack->next($mappings, $context) as $key => $mappedEntity) {
-            $portal = $context->getPortal($mappedEntity->getMapping());
+            $portal = $context->getPortal();
 
             if (!$portal instanceof BottlePortal) {
                 yield $key => $mappedEntity;
@@ -34,7 +34,7 @@ class HalfFullHalfEmptyBottleEmitter extends EmitterContract
                 continue;
             }
 
-            $config = $context->getConfig($mappedEntity->getMapping()) ?? [];
+            $config = $context->getConfig() ?? [];
             $config['contentFactor'] ??= 0.5;
             $content = new Dataset\BottleContent();
             $content->setContent(
