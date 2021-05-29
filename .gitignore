@@ -9,4 +9,4 @@ shopware-platform/var/
 sdk/
 
 repos/
-dev-ops/make.d/local
+dev-ops/make.d/local/
