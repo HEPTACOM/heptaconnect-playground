@@ -85,6 +85,9 @@ class Init extends Command
                 'command' => 'dal:refresh:index',
             ],
             [
+                'command' => 'theme:refresh',
+            ],
+            [
                 'command' => 'user:create',
                 'allowedToFail' => true,
                 'username' => 'admin',
@@ -96,6 +99,11 @@ class Init extends Command
                 'allowedToFail' => true,
                 '--name' => 'Storefront',
                 '--url' => $_SERVER['APP_URL'] ?? 'http://localhost',
+            ],
+            [
+                'command' => 'theme:change',
+                '--all' => true,
+                'theme-name' => 'Storefront',
             ],
             [
                 'command' => 'assets:install',
