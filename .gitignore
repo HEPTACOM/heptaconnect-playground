@@ -5,5 +5,8 @@ shopware-platform/public/*
 !shopware-platform/public/.htaccess.dist
 !shopware-platform/public/index.php
 shopware-platform/var/
-repos/
+
 sdk/
+
+repos/
+dev-ops/make.d/local

@@ -48,3 +48,5 @@ repos:
 	git -C "repos/dataset-ecommerce" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-dataset-ecommerce.git" "repos/dataset-ecommerce"
 	git -C "repos/core" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "repos/core"
 	git -C "repos/bridge-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "repos/bridge-shopware-platform"
+
+include dev-ops/make.d/**/*.mk
