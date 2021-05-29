@@ -19,10 +19,10 @@ class BottleEmitter extends EmitterContract
         MappingInterface $mapping,
         EmitContextInterface $context
     ): ?DatasetEntityContract {
-        $container = $context->getContainer($mapping);
+        $container = $context->getContainer();
         /** @var BottlePortal $portal */
         $portal = $container->get('portal');
-        $data = iterable_to_array($portal->getBottleStorage($context->getConfig($mapping) ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
+        $data = iterable_to_array($portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
 
         if (\count($data) === 0) {
             return null;
@@ -32,7 +32,7 @@ class BottleEmitter extends EmitterContract
         $entity = clone current($data);
 
         $statKey = 'bottleStats.emit.' . ($entity->getPrimaryKey() ?? '');
-        $context->getStorage($mapping)->set($statKey, ($context->getStorage($mapping)->get($statKey) ?? 0) + 1);
+        $context->getStorage()->set($statKey, ($context->getStorage()->get($statKey) ?? 0) + 1);
 
         return $entity;
     }
