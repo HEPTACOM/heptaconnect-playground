@@ -16,13 +16,12 @@ class BottleReceiver extends ReceiverContract
     }
 
     protected function run(
-        MappingInterface $mapping,
         DatasetEntityContract $entity,
         ReceiveContextInterface $context
     ): void {
         $entity->setPrimaryKey($entity->getPrimaryKey() ?? $this->generatePrimaryKey());
         $statKey = 'bottleStats.receive.' . $entity->getPrimaryKey();
-        $context->getStorage($mapping)->set($statKey, ($context->getStorage($mapping)->get($statKey) ?? 0) + 1);
+        $context->getStorage()->set($statKey, ($context->getStorage()->get($statKey) ?? 0) + 1);
     }
 
     private function generatePrimaryKey(): string

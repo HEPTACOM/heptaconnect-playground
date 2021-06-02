@@ -16,13 +16,13 @@ class BottleEmitter extends EmitterContract
     }
 
     protected function run(
-        MappingInterface $mapping,
+        string $externalId,
         EmitContextInterface $context
     ): ?DatasetEntityContract {
         $container = $context->getContainer();
         /** @var BottlePortal $portal */
         $portal = $container->get('portal');
-        $data = iterable_to_array($portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $mapping->getExternalId()));
+        $data = iterable_to_array($portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $externalId));
 
         if (\count($data) === 0) {
             return null;
