@@ -31,7 +31,7 @@
         "shopware/core": "6.4.0.0",
         "shopware/storefront": "6.4.0.0",
         "shopware/administration": "6.4.0.0",
-        "heptacom/heptaconnect-bridge-shopware-platform": ">=0.0.1",
+        "heptacom/heptaconnect-bridge-shopware-platform": "^0.1.0",
         "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal-extension": ">=0.0.1",
