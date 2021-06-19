@@ -1,24 +1,22 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Portal\Base\StatusReporting\Contract\StatusReporterContract;
 use Heptacom\HeptaConnect\Portal\Base\StatusReporting\Contract\StatusReportingContextInterface;
-use Psr\Log\LoggerInterface;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
-class BottleStatusReporter extends StatusReporterContract
+class BottleStatusReporter extends StatusReporterContract implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
 
     private BottleHealthService $service;
-    private BottlePortal $portal;
-    private LoggerInterface $logger;
 
-    public function __construct(BottlePortal $portal, BottleHealthService $service, LoggerInterface $logger)
+    public function __construct(BottleHealthService $service)
     {
         $this->service = $service;
-        $this->portal = $portal;
-        $this->logger = $logger;
     }
 
     public function supportsTopic(): string
@@ -28,8 +26,9 @@ class BottleStatusReporter extends StatusReporterContract
 
     protected function run(StatusReportingContextInterface $context): array
     {
-        $result = [$this->supportsTopic() => $this->service->checkHealth()];
-        return $result;
+        return [
+            $this->supportsTopic() => true,
+            'message' => $this->service->checkHealth(),
+        ];
     }
-
 }

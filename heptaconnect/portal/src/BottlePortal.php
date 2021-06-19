@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Heptacom\HeptaConnect\Playground\Portal;
 
@@ -11,35 +12,11 @@ use Heptacom\HeptaConnect\Playground\Dataset\Label;
 use Heptacom\HeptaConnect\Playground\Dataset\LabelCollection;
 use Heptacom\HeptaConnect\Playground\Dataset\Volume;
 use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalContract;
-use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
-use Heptacom\HeptaConnect\Portal\Base\Exploration\ExplorerCollection;
-use Heptacom\HeptaConnect\Portal\Base\Reception\ReceiverCollection;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BottlePortal extends PortalContract
 {
     private ?BottleCollection $bottles = null;
-
-    public function getExplorers(): ExplorerCollection
-    {
-        return new ExplorerCollection([
-            new BottleExplorer(),
-        ]);
-    }
-
-    public function getEmitters(): EmitterCollection
-    {
-        return new EmitterCollection([
-            new BottleEmitter(),
-        ]);
-    }
-
-    public function getReceivers(): ReceiverCollection
-    {
-        return new ReceiverCollection([
-            new BottleReceiver(),
-        ]);
-    }
 
     public function getConfigurationTemplate(): OptionsResolver
     {
