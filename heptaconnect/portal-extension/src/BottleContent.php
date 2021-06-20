@@ -4,18 +4,10 @@ namespace Heptacom\HeptaConnect\Playground\PortalExtension;
 
 use Heptacom\HeptaConnect\Playground\Portal\BottlePortal;
 use Heptacom\HeptaConnect\Portal\Base\Portal\Contract\PortalExtensionContract;
-use Heptacom\HeptaConnect\Portal\Base\Emission\EmitterCollection;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BottleContent extends PortalExtensionContract
 {
-    public function getEmitterDecorators(): EmitterCollection
-    {
-        return new EmitterCollection([
-            new HalfFullHalfEmptyBottleEmitter(),
-        ]);
-    }
-
     public function extendConfiguration(OptionsResolver $template): OptionsResolver
     {
         return parent::extendConfiguration($template)

@@ -4,12 +4,18 @@ namespace Heptacom\HeptaConnect\Playground\Portal;
 
 use Heptacom\HeptaConnect\Dataset\Base\Contract\DatasetEntityContract;
 use Heptacom\HeptaConnect\Playground\Dataset\Bottle;
-use Heptacom\HeptaConnect\Portal\Base\Mapping\Contract\MappingInterface;
 use Heptacom\HeptaConnect\Portal\Base\Emission\Contract\EmitterContract;
 use Heptacom\HeptaConnect\Portal\Base\Emission\Contract\EmitContextInterface;
 
 class BottleEmitter extends EmitterContract
 {
+    private BottlePortal $portal;
+
+    public function __construct(BottlePortal $portal)
+    {
+        $this->portal = $portal;
+    }
+
     public function supports(): string
     {
         return Bottle::class;
@@ -19,10 +25,7 @@ class BottleEmitter extends EmitterContract
         string $externalId,
         EmitContextInterface $context
     ): ?DatasetEntityContract {
-        $container = $context->getContainer();
-        /** @var BottlePortal $portal */
-        $portal = $container->get('portal');
-        $data = iterable_to_array($portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $externalId));
+        $data = iterable_to_array($this->portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $externalId));
 
         if (\count($data) === 0) {
             return null;
