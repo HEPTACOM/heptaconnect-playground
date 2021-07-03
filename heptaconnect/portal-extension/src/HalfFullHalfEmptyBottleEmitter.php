@@ -10,18 +10,23 @@ use Heptacom\HeptaConnect\Portal\Base\Emission\Contract\EmitContextInterface;
 
 class HalfFullHalfEmptyBottleEmitter extends EmitterContract
 {
+    private float $configContentFactor;
+
+    public function __construct(float $configContentFactor)
+    {
+        $this->configContentFactor = $configContentFactor;
+    }
+
     /**
      * @param Bottle $entity
      */
     protected function extend(DatasetEntityContract $entity, EmitContextInterface $context): DatasetEntityContract
     {
-        $config = $context->getConfig() ?? [];
-        $config['contentFactor'] ??= 0.5;
         $content = new Dataset\BottleContent();
         $content->setContent(
             (new Volume())
                 ->setUnit(Volume::UNIT_LITER)
-                ->setAmount($entity->getCapacity()->getAmount() * $config['contentFactor'])
+                ->setAmount($entity->getCapacity()->getAmount() * $this->configContentFactor)
         );
         $entity->attach($content);
 
