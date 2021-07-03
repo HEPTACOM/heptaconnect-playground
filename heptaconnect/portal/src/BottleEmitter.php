@@ -9,11 +9,11 @@ use Heptacom\HeptaConnect\Portal\Base\Emission\Contract\EmitContextInterface;
 
 class BottleEmitter extends EmitterContract
 {
-    private BottlePortal $portal;
+    private BottleApiClient $bottleApiClient;
 
-    public function __construct(BottlePortal $portal)
+    public function __construct(BottleApiClient $bottleApiClient)
     {
-        $this->portal = $portal;
+        $this->bottleApiClient = $bottleApiClient;
     }
 
     public function supports(): string
@@ -25,7 +25,11 @@ class BottleEmitter extends EmitterContract
         string $externalId,
         EmitContextInterface $context
     ): ?DatasetEntityContract {
-        $data = iterable_to_array($this->portal->getBottleStorage($context->getConfig() ?? [])->filter(fn (Bottle $b) => $b->getPrimaryKey() === $externalId));
+        $data = iterable_to_array(
+            $this->bottleApiClient
+                ->getBottles()
+                ->filter(fn (Bottle $b) => $b->getPrimaryKey() === $externalId)
+        );
 
         if (\count($data) === 0) {
             return null;

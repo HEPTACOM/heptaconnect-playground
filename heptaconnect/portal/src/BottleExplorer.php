@@ -9,11 +9,11 @@ use Heptacom\HeptaConnect\Portal\Base\Exploration\Contract\ExploreContextInterfa
 
 class BottleExplorer extends ExplorerContract
 {
-    private BottlePortal $portal;
+    private BottleApiClient $bottleApiClient;
 
-    public function __construct(BottlePortal $portal)
+    public function __construct(BottleApiClient $bottleApiClient)
     {
-        $this->portal = $portal;
+        $this->bottleApiClient = $bottleApiClient;
     }
 
     public function supports(): string
@@ -24,7 +24,7 @@ class BottleExplorer extends ExplorerContract
     protected function run(ExploreContextInterface $context): iterable
     {
         /** @var Bottle $bottle */
-        foreach ($this->portal->getBottleStorage($context->getConfig() ?? []) as $bottle) {
+        foreach ($this->bottleApiClient->getBottles() as $bottle) {
             $statKey = 'bottleStats.explore.' . ($bottle->getPrimaryKey() ?? '');
             $context->getStorage()->set($statKey, ($context->getStorage()->get($statKey) ?? 0) + 1);
 
