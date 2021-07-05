@@ -16,6 +16,7 @@ FlowComponent::explorer(Bottle::class)
             yield $bottle;
         }
     });
+
 FlowComponent::emitter(Bottle::class)
     ->run(static function (string $id, BottleApiClient $client, PortalStorageInterface $storage): ?Bottle {
         $data = iterable_to_array($client->getBottles()->filter(static fn (Bottle $b) => $b->getPrimaryKey() === $id));
@@ -32,6 +33,7 @@ FlowComponent::emitter(Bottle::class)
 
         return $entity;
     });
+
 FlowComponent::receiver(Bottle::class)
     ->run(static function (Bottle $bottle, PortalStorageInterface $storage): void {
         $bottle->setPrimaryKey($bottle->getPrimaryKey() ?? bin2hex(random_bytes(16)));

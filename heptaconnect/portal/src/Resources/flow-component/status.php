@@ -7,5 +7,5 @@ use Heptacom\HeptaConnect\Portal\Base\StatusReporting\Contract\StatusReporterCon
 
 FlowComponent::statusReporter(StatusReporterContract::TOPIC_HEALTH, static fn (BottleHealthService $service): array => [
     StatusReporterContract::TOPIC_HEALTH => true,
-    'message' => $this->service->checkHealth(),
+    'message' => $service->checkHealth(),
 ]);
