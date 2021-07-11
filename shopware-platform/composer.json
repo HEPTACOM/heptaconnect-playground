@@ -31,11 +31,11 @@
         "shopware/core": "6.4.1.2",
         "shopware/storefront": "6.4.1.2",
         "shopware/administration": "6.4.1.2",
-        "heptacom/heptaconnect-bridge-shopware-platform": "^0.4",
+        "heptacom/heptaconnect-bridge-shopware-platform": "^0.5",
         "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal": ">=0.0.1",
         "heptacom/heptaconnect-playground-portal-extension": ">=0.0.1",
-        "heptacom/heptaconnect-portal-local-shopware-platform": "^0.4",
-        "heptacom/heptaconnect-lib-sdk": "^0.4"
+        "heptacom/heptaconnect-portal-local-shopware-platform": "^0.5",
+        "heptacom/heptaconnect-lib-sdk": "^0.5"
     }
 }
