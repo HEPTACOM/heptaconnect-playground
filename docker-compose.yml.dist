@@ -1,0 +1,44 @@
+version: '3'
+services:
+    heptaconnect-playground: #starting takes a while because it runs the make command. /admin Login is admin/shopware
+        image: heptacom/heptaconnect-playground
+        container_name: heptaconnect-playground
+        depends_on:
+            - heptaconnect-playground-db
+        ports:
+            - "8080:80" #adjust APP_URL accordingly
+#        volumes:
+#            - ./heptaconnect:/var/www/html/heptaconnect
+#            - ./repos:/var/www/html/repos
+#            - ./shopware-platform:/var/www/html/shopware-platform
+        environment:
+            COMPOSER_MEMORY_LIMIT: -1
+            APP_URL: http://localhost:8080 #adjust if port changes
+            DATABASE_HOST: heptaconnect-playground-db
+            DATABASE_URL: mysql://shopware:password@heptaconnect-playground-db:3306/shopware
+            XDEBUG_CONFIG: remote_host=host.docker.internal remote_enable=1 remote_autostart=1 # remote_log=/var/www/html/var/logs/xdebug.log
+    heptaconnect-playground-db:
+        image: mariadb:10.6
+#        image: mysql:5.7.25
+        container_name: heptaconnect-playground-db
+#        ports:
+#            - "33060:3306"
+        volumes:
+            - heptaconnect-playground-db_data:/var/lib/mysql/
+        environment:
+            MYSQL_ROOT_PASSWORD: password1234
+            MYSQL_DATABASE: shopware
+            MYSQL_USER: shopware
+            MYSQL_PASSWORD: password
+    phpmyadmin:
+        depends_on:
+            - heptaconnect-playground-db
+        image: phpmyadmin/phpmyadmin
+        container_name: heptaconnect-playground-phpmyadmin
+        ports:
+            - '9080:80'
+        environment:
+            PMA_HOST: heptaconnect-playground-db
+            MYSQL_ROOT_PASSWORD: password1234
+volumes:
+    heptaconnect-playground-db_data:

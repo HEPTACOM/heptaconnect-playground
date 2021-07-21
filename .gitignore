@@ -12,3 +12,5 @@ sdk/
 
 repos/
 dev-ops/make.d/local/
+
+docker-compose.yml
