@@ -1,4 +1,4 @@
-FROM heptacom/heptaconnect-development
+FROM heptacom/heptaconnect-development:php74-0.6.0
 
 COPY --chown=www-data:www-data . /var/www/html
 COPY dev-ops/docker/000-default.conf /etc/apache2/sites-available/000-default.conf
