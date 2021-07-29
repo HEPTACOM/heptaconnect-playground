@@ -1,0 +1,9 @@
+*
+!/dev-ops/make.d
+!/dev-ops/docker
+!heptaconnect
+!shopware-platform
+!Makefile
+!CLA.md
+!LICENSE.md
+!README.md
