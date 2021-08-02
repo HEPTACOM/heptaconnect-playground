@@ -11,13 +11,53 @@
         }
     },
     "repositories": {
-        "heptaconnect-demo": {
-            "url": "../heptaconnect/**",
-            "type": "path"
-        },
-        "heptaconnect-sources": {
+        "repos": {
             "type": "path",
             "url": "../repos/**"
+        },
+        "heptaconnect-demo": {
+            "type": "path",
+            "url": "../heptaconnect/**"
+        },
+        "heptaconnect-source-bridge-shopware-platform": {
+            "type": "vcs",
+            "url": "../sources/bridge-shopware-platform"
+        },
+        "heptaconnect-source-core": {
+            "type": "vcs",
+            "url": "../sources/core"
+        },
+        "heptaconnect-source-dataset-base": {
+            "type": "vcs",
+            "url": "../sources/dataset-base"
+        },
+        "heptaconnect-source-dataset-ecommerce": {
+            "type": "vcs",
+            "url": "../sources/dataset-ecommerce"
+        },
+        "heptaconnect-source-lib-sdk": {
+            "type": "vcs",
+            "url": "../sources/lib-sdk"
+        },
+        "heptaconnect-source-portal-base": {
+            "type": "vcs",
+            "url": "../sources/portal-base"
+        },
+        "heptaconnect-source-portal-local-shopware-platform": {
+            "type": "vcs",
+            "url": "../sources/portal-local-shopware-platform"
+        },
+        "heptaconnect-source-storage-base": {
+            "type": "vcs",
+            "url": "../sources/storage-base"
+        },
+        "heptaconnect-source-storage-native": {
+            "type": "vcs",
+            "url": "../sources/storage-native"
+        },
+        "heptaconnect-source-storage-shopware-dal": {
+            "type": "vcs",
+            "url": "../sources/storage-shopware-dal"
         }
     },
     "autoload": {
@@ -32,9 +72,9 @@
         "shopware/storefront": "6.4.1.2",
         "shopware/administration": "6.4.1.2",
         "heptacom/heptaconnect-bridge-shopware-platform": "~0.6.0",
-        "heptacom/heptaconnect-playground-dataset": ">=0.0.1",
-        "heptacom/heptaconnect-playground-portal": ">=0.0.1",
-        "heptacom/heptaconnect-playground-portal-extension": ">=0.0.1",
+        "heptacom/heptaconnect-playground-dataset": "*",
+        "heptacom/heptaconnect-playground-portal": "*",
+        "heptacom/heptaconnect-playground-portal-extension": "*",
         "heptacom/heptaconnect-portal-local-shopware-platform": "~0.6.0",
         "heptacom/heptaconnect-lib-sdk": "~0.6.0"
     }
