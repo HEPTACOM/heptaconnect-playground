@@ -11,6 +11,7 @@ shopware-platform/var/
 sdk/
 
 repos/
+sources/
 dev-ops/make.d/local/
 
 docker-compose.yml
