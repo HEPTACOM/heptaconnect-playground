@@ -8,6 +8,7 @@ shopware-platform: shopware-platform-files shopware-platform-db
 .PHONY: shopware-platform-files
 shopware-platform-files: sources
 	chmod 600 shopware-platform/config/jwt/{public,private}.pem
+	[[ -d repos ]] || mkdir repos
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
 
