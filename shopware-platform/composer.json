@@ -13,7 +13,13 @@
     "repositories": {
         "repos": {
             "type": "path",
-            "url": "../repos/**"
+            "url": "../repos/**",
+            "canonical": false
+        },
+        "sources": {
+            "type": "path",
+            "url": "../sources/**",
+            "canonical": false
         },
         "heptaconnect-demo": {
             "type": "path",
