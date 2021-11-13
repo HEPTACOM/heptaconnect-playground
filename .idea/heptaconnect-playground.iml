@@ -16,6 +16,16 @@
       <sourceFolder url="file://$MODULE_DIR$/sources/storage-base/src" isTestSource="false" packagePrefix="Heptacom\HeptaConnect\Storage\Base" />
       <sourceFolder url="file://$MODULE_DIR$/sources/storage-native/src" isTestSource="false" packagePrefix="Heptacom\HeptaConnect\Storage\Native" />
       <sourceFolder url="file://$MODULE_DIR$/sources/storage-shopware-dal/src" isTestSource="false" packagePrefix="Heptacom\HeptaConnect\Storage\ShopwareDal" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/bridge-shopware-platform/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/core/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Core\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/dataset-base/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Dataset\Base\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/dataset-ecommerce/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Dataset\Ecommerce\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/lib-sdk/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Sdk\Command" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/portal-base/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Portal\Base\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/portal-local-shopware-platform/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Portal\LocalShopwarePlatform\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/storage-base/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Storage\Base\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/storage-native/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Storage\Native\Test" />
+      <sourceFolder url="file://$MODULE_DIR$/sources/storage-shopware-dal/test" isTestSource="true" packagePrefix="Heptacom\HeptaConnect\Storage\ShopwareDal\Test" />
       <excludeFolder url="file://$MODULE_DIR$/shopware-platform/files" />
       <excludeFolder url="file://$MODULE_DIR$/shopware-platform/var" />
       <excludeFolder url="file://$MODULE_DIR$/shopware-platform/vendor/heptacom" />
