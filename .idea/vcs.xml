@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/bridge-shopware-platform" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/dataset-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/dataset-ecommerce" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/docs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/lib-sdk" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/portal-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/portal-local-shopware-platform" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/storage-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/storage-native" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/sources/storage-shopware-dal" vcs="Git" />
+  </component>
+</project>
