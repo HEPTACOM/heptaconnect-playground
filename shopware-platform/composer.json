@@ -7,7 +7,7 @@
     ],
     "config": {
         "platform": {
-            "php": "7.4.0"
+            "php": "7.4.3"
         }
     },
     "repositories": {
@@ -77,11 +77,11 @@
         "shopware/core": "6.4.1.2",
         "shopware/storefront": "6.4.1.2",
         "shopware/administration": "6.4.1.2",
-        "heptacom/heptaconnect-bridge-shopware-platform": "~0.7.0",
+        "heptacom/heptaconnect-bridge-shopware-platform": "~0.8.0",
         "heptacom/heptaconnect-playground-dataset": "*",
         "heptacom/heptaconnect-playground-portal": "*",
         "heptacom/heptaconnect-playground-portal-extension": "*",
-        "heptacom/heptaconnect-portal-local-shopware-platform": "~0.7.0",
-        "heptacom/heptaconnect-lib-sdk": "~0.7.0"
+        "heptacom/heptaconnect-portal-local-shopware-platform": "~0.8.0",
+        "heptacom/heptaconnect-lib-sdk": "~0.8.0"
     }
 }
