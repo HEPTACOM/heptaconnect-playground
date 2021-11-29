@@ -13,6 +13,6 @@
     },
     "require": {
         "php": ">=7.4",
-        "heptacom/heptaconnect-dataset-base": "~0.6.0"
+        "heptacom/heptaconnect-dataset-base": "~0.8.0"
     }
 }

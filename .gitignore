@@ -10,8 +10,10 @@ shopware-platform/var/
 
 sdk/
 
-repos/
-sources/
+repos/*
+!repos/.gitkeep
+sources/*
+!sources/.gitkeep
 dev-ops/make.d/local/
 
 docker-compose.yml

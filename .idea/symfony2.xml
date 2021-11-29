@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Symfony2PluginSettings">
+    <option name="directoryToWeb" value="shopware-platform/public" />
+    <option name="directoryToApp" value="shopware-platform/src" />
+    <option name="pluginEnabled" value="true" />
+    <option name="serviceClassAsIdAttribute" value="true" />
+    <option name="lastServiceGeneratorLanguage" value="xml" />
+  </component>
+</project>
