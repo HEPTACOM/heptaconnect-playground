@@ -8,7 +8,7 @@ A central Makefile is used to automate most of the examples.
 Start the example with `make shopware-platform`.
 To supply a different database server you can set the DSN with the `DATABASE_URL` environment variable.
 
-Or run `docker build . -t heptacom/heptaconnect-playground` to create a new docker image.
+Or run `docker build . -t heptacom/heptaconnect-playground:0.8` to create a new docker image.
 Rename the file "docker-compose.yml.dist" to "docker-compose.yml" and adapt it according to your own ideas.
 Then run `docker-compose up -d`, please be patient, database imports and additional preparations will be 
 made at the first start. After that you can connect to your container with: `docker exec -it heptaconnect-playground bash`. 

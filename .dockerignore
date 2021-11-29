@@ -3,6 +3,9 @@
 !/dev-ops/docker
 !heptaconnect
 !shopware-platform
+shopware-platform/vendor
+shopware-platform/var
+shopware-platform/composer.lock
 !Makefile
 !CLA.md
 !LICENSE.md
