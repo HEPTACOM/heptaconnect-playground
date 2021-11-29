@@ -3,10 +3,17 @@ PHP := $(shell which php) $(PHP_EXTRA_ARGS)
 COMPOSER := $(PHP) $(shell which composer)
 
 .PHONY: shopware-platform
-shopware-platform: sources
+shopware-platform: shopware-platform-files shopware-platform-db
+
+.PHONY: shopware-platform-files
+shopware-platform-files: sources
 	chmod 600 shopware-platform/config/jwt/{public,private}.pem
+	[[ -d repos ]] || mkdir repos
 	[[ -d shopware-platform/vendor ]] || $(COMPOSER) install -d shopware-platform
 	[[ -f shopware-platform/composer.lock ]] || $(COMPOSER) install -d shopware-platform
+
+.PHONY: shopware-platform-db
+shopware-platform-db:
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 	$(PHP) shopware-platform/bin/shopware playground:demo-data -vvv --no-interaction
 
@@ -50,4 +57,4 @@ sources:
 	git -C "sources/bridge-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "sources/bridge-shopware-platform"
 	git -C "sources/docs" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-docs.git" "sources/docs"
 
-include dev-ops/make.d/**/*.mk
+-include dev-ops/make.d/**/*.mk

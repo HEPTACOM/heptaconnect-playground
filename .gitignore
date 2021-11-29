@@ -15,3 +15,5 @@ repos/*
 sources/*
 !sources/.gitkeep
 dev-ops/make.d/local/
+
+docker-compose.yml
