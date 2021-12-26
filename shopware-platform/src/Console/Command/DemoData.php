@@ -5,11 +5,13 @@ namespace Heptacom\HeptaConnect\Playground\ShopwarePlatform\Console\Command;
 use Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Content\KeyAlias\KeyAliasEntity;
 use Heptacom\HeptaConnect\Playground\Portal\BottlePortal;
 use Heptacom\HeptaConnect\Portal\Base\StorageKey\Contract\PortalNodeKeyInterface;
+use Heptacom\HeptaConnect\Portal\Base\StorageKey\PortalNodeKeyCollection;
 use Heptacom\HeptaConnect\Portal\LocalShopwarePlatform\Portal as LocalShopwarePlatformPortal;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreateActionInterface;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreatePayload;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreatePayloads;
-use Heptacom\HeptaConnect\Storage\Base\Contract\Repository\PortalNodeRepositoryContract;
+use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Get\PortalNodeGetActionInterface;
+use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Get\PortalNodeGetCriteria;
 use Heptacom\HeptaConnect\Storage\Base\Contract\StorageKeyGeneratorContract;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
@@ -36,21 +38,21 @@ class DemoData extends Command
 
     private EntityRepositoryInterface $aliasRepository;
 
-    private PortalNodeRepositoryContract $portalNodeRepository;
-
     private PortalNodeCreateActionInterface $portalNodeCreateAction;
+
+    private PortalNodeGetActionInterface $portalNodeGetAction;
 
     public function __construct(
         StorageKeyGeneratorContract $storageKeyGenerator,
         EntityRepositoryInterface $aliasRepository,
-        PortalNodeRepositoryContract $portalNodeRepository,
-        PortalNodeCreateActionInterface $portalNodeCreateAction
+        PortalNodeCreateActionInterface $portalNodeCreateAction,
+        PortalNodeGetActionInterface $portalNodeGetAction
     ) {
         parent::__construct();
         $this->aliasRepository = $aliasRepository;
         $this->storageKeyGenerator = $storageKeyGenerator;
-        $this->portalNodeRepository = $portalNodeRepository;
         $this->portalNodeCreateAction = $portalNodeCreateAction;
+        $this->portalNodeGetAction = $portalNodeGetAction;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -69,6 +71,8 @@ class DemoData extends Command
         }
 
         $criteria->addFilter(new MultiFilter(MultiFilter::CONNECTION_OR, $filters));
+        $portalNodeKeys = new PortalNodeKeyCollection();
+        $portalNodeKeyAlias = [];
 
         /** @var KeyAliasEntity $alias */
         foreach ($this->aliasRepository->search($criteria, $context) as $alias) {
@@ -78,10 +82,18 @@ class DemoData extends Command
                 continue;
             }
 
-            $portalClass = $this->portalNodeRepository->read($storageKey);
+            $portalNodeKeys->push([$storageKey]);
+            $portalNodeKeyAlias[$this->storageKeyGenerator->serialize($storageKey)] = $alias->getAlias();
+        }
 
-            if (\in_array($alias->getAlias(), self::DEMO_DATA['portal-nodes'][$portalClass] ?? [])) {
-                unset($createPortalNodes[$alias->getAlias()]);
+        foreach ($this->portalNodeGetAction->get(new PortalNodeGetCriteria($portalNodeKeys)) as $portalNode) {
+            $serializedPortalNodeKey = $this->storageKeyGenerator->serialize($portalNode->getPortalNodeKey());
+            $alias = $portalNodeKeyAlias[$serializedPortalNodeKey] ?? null;
+
+            unset($portalNodeKeyAlias[$serializedPortalNodeKey]);
+
+            if (\in_array($alias, self::DEMO_DATA['portal-nodes'][$portalNode->getPortalClass()] ?? [])) {
+                unset($createPortalNodes[$alias]);
             }
         }
 
