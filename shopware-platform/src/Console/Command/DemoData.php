@@ -6,6 +6,9 @@ use Heptacom\HeptaConnect\Bridge\ShopwarePlatform\Content\KeyAlias\KeyAliasEntit
 use Heptacom\HeptaConnect\Playground\Portal\BottlePortal;
 use Heptacom\HeptaConnect\Portal\Base\StorageKey\Contract\PortalNodeKeyInterface;
 use Heptacom\HeptaConnect\Portal\LocalShopwarePlatform\Portal as LocalShopwarePlatformPortal;
+use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreateActionInterface;
+use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreatePayload;
+use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\Create\PortalNodeCreatePayloads;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Repository\PortalNodeRepositoryContract;
 use Heptacom\HeptaConnect\Storage\Base\Contract\StorageKeyGeneratorContract;
 use Shopware\Core\Framework\Context;
@@ -35,15 +38,19 @@ class DemoData extends Command
 
     private PortalNodeRepositoryContract $portalNodeRepository;
 
+    private PortalNodeCreateActionInterface $portalNodeCreateAction;
+
     public function __construct(
         StorageKeyGeneratorContract $storageKeyGenerator,
         EntityRepositoryInterface $aliasRepository,
-        PortalNodeRepositoryContract $portalNodeRepository
+        PortalNodeRepositoryContract $portalNodeRepository,
+        PortalNodeCreateActionInterface $portalNodeCreateAction
     ) {
         parent::__construct();
         $this->aliasRepository = $aliasRepository;
         $this->storageKeyGenerator = $storageKeyGenerator;
         $this->portalNodeRepository = $portalNodeRepository;
+        $this->portalNodeCreateAction = $portalNodeCreateAction;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -78,14 +85,28 @@ class DemoData extends Command
             }
         }
 
-        foreach ($createPortalNodes as $alias => $portalClass) {
-            $portalNodeKey = $this->portalNodeRepository->create($portalClass);
+        $portalNodeCreatePayloads = new PortalNodeCreatePayloads();
+        $aliases = [];
 
-            $this->aliasRepository->create([[
+        foreach ($createPortalNodes as $alias => $portalClass) {
+            $portalNodeCreatePayloads->push([new PortalNodeCreatePayload($portalClass)]);
+            $aliases[] = $alias;
+        }
+
+        $portalNodeCreateResult = $this->portalNodeCreateAction->create($portalNodeCreatePayloads);
+
+        $aliasInserts = [];
+
+        foreach ($portalNodeCreateResult as $result) {
+            $aliasInserts[] = [
                 'id' => Uuid::randomHex(),
-                'alias' => $alias,
-                'original' => $this->storageKeyGenerator->serialize($portalNodeKey),
-            ]], $context);
+                'alias' => \array_shift($aliases),
+                'original' => $this->storageKeyGenerator->serialize($result),
+            ];
+        }
+
+        if ($aliasInserts !== []) {
+            $this->aliasRepository->create($aliasInserts, $context);
         }
 
         return 0;
