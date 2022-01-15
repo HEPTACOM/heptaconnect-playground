@@ -49,5 +49,3 @@ sources:
 	git -C "sources/core" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "sources/core"
 	git -C "sources/bridge-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "sources/bridge-shopware-platform"
 	git -C "sources/docs" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-docs.git" "sources/docs"
-
-include dev-ops/make.d/**/*.mk
