@@ -11,16 +11,6 @@
         }
     },
     "repositories": {
-        "repos": {
-            "type": "path",
-            "url": "../repos/**",
-            "canonical": false
-        },
-        "sources": {
-            "type": "path",
-            "url": "../sources/**",
-            "canonical": false
-        },
         "heptaconnect-demo": {
             "type": "path",
             "url": "../heptaconnect/**"
