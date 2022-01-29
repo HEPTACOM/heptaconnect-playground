@@ -47,10 +47,6 @@
             "type": "vcs",
             "url": "../sources/storage-base"
         },
-        "heptaconnect-source-storage-native": {
-            "type": "vcs",
-            "url": "../sources/storage-native"
-        },
         "heptaconnect-source-storage-shopware-dal": {
             "type": "vcs",
             "url": "../sources/storage-shopware-dal"
