@@ -1,4 +1,10 @@
 services:
+    Heptacom\HeptaConnect\Core\Bridge\PortalNode\Configuration\InstructionFileLoader:
+        tags:
+            - { name: heptaconnect_core.portal_node_configuration.instruction_file_loader }
+        arguments:
+            - '%kernel.project_dir%/config/portal_configs.php'
+
     Heptacom\HeptaConnect\Playground\ShopwarePlatform\Console\Command\Init:
         tags:
             - { name: 'console.command' }
