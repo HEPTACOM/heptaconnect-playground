@@ -11,16 +11,6 @@
         }
     },
     "repositories": {
-        "repos": {
-            "type": "path",
-            "url": "../repos/**",
-            "canonical": false
-        },
-        "sources": {
-            "type": "path",
-            "url": "../sources/**",
-            "canonical": false
-        },
         "heptaconnect-demo": {
             "type": "path",
             "url": "../heptaconnect/**"
@@ -56,10 +46,6 @@
         "heptaconnect-source-storage-base": {
             "type": "vcs",
             "url": "../sources/storage-base"
-        },
-        "heptaconnect-source-storage-native": {
-            "type": "vcs",
-            "url": "../sources/storage-native"
         },
         "heptaconnect-source-storage-shopware-dal": {
             "type": "vcs",

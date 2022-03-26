@@ -39,7 +39,6 @@ shopware-platform-migration: shopware-platform
 sources:
 	[[ -d sources ]] || mkdir sources
 	git -C "sources/storage-shopware-dal" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-shopware-dal.git" "sources/storage-shopware-dal"
-	git -C "sources/storage-native" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-native.git" "sources/storage-native"
 	git -C "sources/storage-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-storage-base.git" "sources/storage-base"
 	git -C "sources/portal-base" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-portal-base.git" "sources/portal-base"
 	git -C "sources/portal-local-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-portal-local-shopware-platform.git" "sources/portal-local-shopware-platform"
@@ -49,5 +48,3 @@ sources:
 	git -C "sources/core" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-core.git" "sources/core"
 	git -C "sources/bridge-shopware-platform" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-bridge-shopware-platform.git" "sources/bridge-shopware-platform"
 	git -C "sources/docs" pull --ff-only || git clone "https://github.com/HEPTACOM/heptaconnect-docs.git" "sources/docs"
-
-include dev-ops/make.d/**/*.mk
