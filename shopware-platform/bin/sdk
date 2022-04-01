@@ -1,8 +1,0 @@
-#!/usr/bin/env php
-<?php declare(strict_types=1);
-
-$classLoader = require_once __DIR__ . '/../vendor/autoload.php';
-$envFile = __DIR__ . '/../.env';
-$_SERVER['PROJECT_ROOT'] = dirname(__DIR__);
-
-require __DIR__ . '/../vendor/heptacom/heptaconnect-lib-sdk/bootstrap/heptaconnect-sdk.php';
