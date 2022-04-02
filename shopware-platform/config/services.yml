@@ -13,4 +13,5 @@ services:
         arguments:
             - '@Heptacom\HeptaConnect\Storage\ShopwareDal\StorageKeyGenerator'
             - '@heptaconnect_bridge_key_alias.repository'
-            - '@Heptacom\HeptaConnect\Storage\ShopwareDal\Repository\PortalNodeRepository'
+            - '@Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\PortalNodeCreateActionInterface'
+            - '@Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\PortalNodeGetActionInterface'

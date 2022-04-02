@@ -1,4 +1,6 @@
-image: heptacom/heptaconnect-pipeline:php74-latest
+image:
+    name: heptacom/heptaconnect-pipeline:php74-latest
+    run-as-user: 0
 
 definitions:
     services:
