@@ -9,6 +9,7 @@ use Heptacom\HeptaConnect\Portal\Base\StorageKey\PortalNodeKeyCollection;
 use Heptacom\HeptaConnect\Portal\LocalShopwarePlatform\Portal as LocalShopwarePlatformPortal;
 use Heptacom\HeptaConnect\Storage\Base\Action\PortalNode\Create\PortalNodeCreatePayload;
 use Heptacom\HeptaConnect\Storage\Base\Action\PortalNode\Create\PortalNodeCreatePayloads;
+use Heptacom\HeptaConnect\Storage\Base\Action\PortalNode\Create\PortalNodeCreateResult;
 use Heptacom\HeptaConnect\Storage\Base\Action\PortalNode\Get\PortalNodeGetCriteria;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\PortalNodeCreateActionInterface;
 use Heptacom\HeptaConnect\Storage\Base\Contract\Action\PortalNode\PortalNodeGetActionInterface;
@@ -109,11 +110,12 @@ class DemoData extends Command
 
         $aliasInserts = [];
 
+        /** @var PortalNodeCreateResult $result */
         foreach ($portalNodeCreateResult as $result) {
             $aliasInserts[] = [
                 'id' => Uuid::randomHex(),
                 'alias' => \array_shift($aliases),
-                'original' => $this->storageKeyGenerator->serialize($result),
+                'original' => $this->storageKeyGenerator->serialize($result->getPortalNodeKey()),
             ];
         }
 
