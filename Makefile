@@ -10,14 +10,6 @@ shopware-platform: sources
 	$(PHP) shopware-platform/bin/shopware playground:init -vvv --force --no-interaction
 	$(PHP) shopware-platform/bin/shopware playground:demo-data -vvv --no-interaction
 
-.PHONY: sdk
-sdk: sources
-	[[ -d sdk ]] || $(COMPOSER) create-project heptacom/heptaconnect-sdk:dev-master sdk --no-scripts --remove-vcs
-	$(COMPOSER) config 'repositories.heptaconnect-sources' --json '{"type":"path","url":"../sources/**"}' -d sdk
-	$(COMPOSER) config 'repositories.heptaconnect-sources-sdk' --json '{"type":"path","url":"../sources/lib-sdk","options":{"symlink": false}}' -d sdk
-	$(COMPOSER) require 'heptacom/heptaconnect-lib-sdk:>=0.0.1' --update-with-all-dependencies -d sdk
-	$(PHP) sdk/vendor/bin/heptaconnect-sdk sdk:install
-
 .PHONY: clean
 clean: shopware-platform-clean
 
