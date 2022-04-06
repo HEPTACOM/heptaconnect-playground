@@ -1,6 +1,4 @@
-image:
-    name: heptacom/heptaconnect-pipeline:php74-latest
-    run-as-user: 0
+image: heptacom/heptaconnect-pipeline:php74-latest
 
 definitions:
     services:
@@ -45,6 +43,9 @@ pipelines:
     default:
         -   step:
                 <<: *default-step
+                image:
+                    name: heptacom/heptaconnect-pipeline:php74-latest
+                    run-as-user: 0
                 name: Install shopware runtime
                 services:
                     - mysql
